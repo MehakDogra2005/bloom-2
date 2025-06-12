@@ -433,10 +433,12 @@ a {
     width: 320px; /* Restored original width */
     min-width: 320px; /* Restored original width */
     height: 200px; /* Decreased height to match card height */
-    background-size: cover;
-    background-position: center;
+    background-size: contain; /* Show full image, prevent head cut-off */
+    background-repeat: no-repeat;
+    background-position: top center; /* Align head to top */
     position: relative;
     border-right: var(--border-light);
+    background-color: #f8f8fa; /* fallback color */
 }
 
 /* Professional Badge Styles */
@@ -1059,6 +1061,9 @@ p {
         width: 280px;
         min-width: 280px;
         height: 320px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
     }
     
     .professional-info {
@@ -1100,6 +1105,9 @@ p {
         height: 280px; /* Increased height for mobile */
         border-right: none;
         border-bottom: var(--border-light);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
     }
     
     .consultation-main {

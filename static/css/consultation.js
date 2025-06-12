@@ -109,17 +109,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch professionals data
     async function fetchProfessionals() {
-        try {            const response = await fetch('../templates/data/doctors.json');
+        try {
+            const response = await fetch('/static/data/doctors.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            state.professionals = data.doctors;
+            // Always normalize image paths for Flask static serving
+            state.professionals = data.doctors.map(doc => ({
+                ...doc,
+                image: doc.image && !doc.image.startsWith('/static/') && doc.image.startsWith('Images/')
+                    ? `/static/${doc.image}`
+                    : doc.image
+            }));
             renderProfessionals(state.professionals);
         } catch (error) {
             console.error('Error fetching professionals:', error);
             showError('Failed to load professionals. Please try again later.');
-            
             // Fallback to mock data if JSON fetch fails
             console.log('Loading mock data as fallback');
             state.professionals = await mockFetchProfessionals();
@@ -497,7 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mock data fetch (replace with real API call)
     async function mockFetchProfessionals() {
-        // Return mock data
+        // Return mock data with updated Google Cloud Storage image URLs
         return [
             // Gynecologists
             {
@@ -505,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Priya Sharma",
                 specialty: "Gynecologist",
                 category: "gynecologist",
-                image: "Images/doctor1.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_priya_sharma_gynecologist.jpg",
                 rating: 4.8,
                 reviews: 214,
                 price: "₹1200",
@@ -522,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Meera Bhatia",
                 specialty: "Gynecologist",
                 category: "gynecologist",
-                image: "Images/doctor2.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_meera_bhatia_gynecologist.jpg",
                 rating: 4.7,
                 reviews: 189,
                 price: "₹900",
@@ -539,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Rajesh Kumar",
                 specialty: "Gynecologist",
                 category: "gynecologist",
-                image: "Images/doctor3.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_rajesh_kumar_gynecologist.jpg",
                 rating: 4.9,
                 reviews: 276,
                 price: "₹1500",
@@ -556,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Amit Tandon",
                 specialty: "Gynecologist",
                 category: "gynecologist",
-                image: "Images/doctor4.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_amit_tandon_gynecologist.jpg",
                 rating: 4.6,
                 reviews: 167,
                 price: "₹1000",
@@ -575,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Deepa Krishnan",
                 specialty: "Ayurvedic Expert",
                 category: "ayurveda",
-                image: "Images/doctor5.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_deepa_krishnan_ayurvedic_expert.jpg",
                 rating: 4.8,
                 reviews: 234,
                 price: "₹800",
@@ -592,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Smita Naram",
                 specialty: "Ayurvedic Expert",
                 category: "ayurveda",
-                image: "Images/doctor6.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_smita_naram_ayurvedic_expert.jpg",
                 rating: 4.9,
                 reviews: 312,
                 price: "₹1200",
@@ -609,7 +615,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Partap Chauhan",
                 specialty: "Ayurvedic Expert",
                 category: "ayurveda",
-                image: "Images/doctor7.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_partap_chauhan_ayurvedic_expert.jpg",
                 rating: 4.7,
                 reviews: 289,
                 price: "₹900",
@@ -626,7 +632,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Ram Krishna Shastri",
                 specialty: "Ayurvedic Expert",
                 category: "ayurveda",
-                image: "Images/doctor8.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_ram_krishna_shastri_ayurvedic_expert.jpg",
                 rating: 4.6,
                 reviews: 178,
                 price: "₹700",
@@ -645,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Yasmin Karachiwala",
                 specialty: "Fitness Coach",
                 category: "fitness",
-                image: "Images/coach1.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_yasmin_karachiwala_fitness_coach.jpg",
                 rating: 4.9,
                 reviews: 456,
                 price: "₹2500",
@@ -662,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Sapna Vyas",
                 specialty: "Fitness Coach",
                 category: "fitness",
-                image: "Images/coach2.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_sapna_vyas_fitness_coach.jpg",
                 rating: 4.7,
                 reviews: 378,
                 price: "₹1800",
@@ -679,7 +685,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Mustafa Ahmed",
                 specialty: "Fitness Coach",
                 category: "fitness",
-                image: "Images/coach3.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_mustafa_ahmed_fitness_coach.jpg",
                 rating: 4.8,
                 reviews: 423,
                 price: "₹2000",
@@ -696,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Ranveer Allahbadia",
                 specialty: "Fitness Coach",
                 category: "fitness",
-                image: "Images/coach4.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_ranveer_allahbadia_fitness_coach.jpg",
                 rating: 4.6,
                 reviews: 345,
                 price: "₹1500",
@@ -715,7 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Rachna Khanna Singh",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist1.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_rachna_khanna_singh_therapist.jpg",
                 rating: 4.9,
                 reviews: 289,
                 price: "₹2000",
@@ -749,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Sayeli Jaiswal",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist3.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_sayeli_jaiswal_therapist.jpg",
                 rating: 4.7,
                 reviews: 267,
                 price: "₹1800",
@@ -766,7 +772,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Kamna Chhibber",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist4.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_kamna_chhibber_therapist.jpg",
                 rating: 4.8,
                 reviews: 345,
                 price: "₹2200",
@@ -783,7 +789,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Kersi Chavda",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist5.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_kersi_chavda_therapist.jpg",
                 rating: 4.9,
                 reviews: 378,
                 price: "₹2500",
@@ -800,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Achal Bhagat",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist6.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_achal_bhagat_therapist.jpg",
                 rating: 4.7,
                 reviews: 289,
                 price: "₹2300",
@@ -817,7 +823,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Harish Shetty",
                 specialty: "Therapist",
                 category: "support",
-                image: "Images/therapist7.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_harish_shetty_therapist.jpg",
                 rating: 4.8,
                 reviews: 334,
                 price: "₹2000",
@@ -829,24 +835,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 location: "Mumbai",
                 justdialUrl: "https://www.justdial.com/Mumbai/Dr-Harish-Shetty"
             },
-            {
-                id: 20,
-                name: "Dr. Samir Parikh",
-                specialty: "Therapist",
-                category: "support",
-                image: "Images/therapist8.jpg",
-                rating: 4.9,
-                reviews: 412,
-                price: "₹2400",
-                availableToday: true,
-                gender: "male",
-                videoConsult: true,
-                education: "MD Psychiatry - Fortis Healthcare",
-                description: "Director of Mental Health and Behavioral Sciences at Fortis Healthcare. Expert in youth mental health.",
-                location: "Delhi",
-                justdialUrl: "https://www.justdial.com/Delhi/Dr-Samir-Parikh"
-            },
-
             // Nutritionists
             {
                 id: 17,
@@ -870,7 +858,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Ishi Khosla",
                 specialty: "Nutritionist",
                 category: "nutritionist",
-                image: "Images/nutritionist2.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_ishi_khosla_nutritionist.jpg",
                 rating: 4.8,
                 reviews: 423,
                 price: "₹2500",
@@ -887,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Nikhil Dhurandhar",
                 specialty: "Nutritionist",
                 category: "nutritionist",
-                image: "Images/nutritionist3.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_nikhil_dhurandhar_nutritionist.jpg",
                 rating: 4.7,
                 reviews: 389,
                 price: "₹2000",
@@ -904,7 +892,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Dr. Manjari Chandra",
                 specialty: "Nutritionist",
                 category: "nutritionist",
-                image: "Images/nutritionist4.jpg",
+                image: "https://storage.googleapis.com/polished-bridge-462015-d8-doctor-images/doctors/doctor_dr_manjari_chandra_nutritionist.jpg",
                 rating: 4.6,
                 reviews: 312,
                 price: "₹1800",

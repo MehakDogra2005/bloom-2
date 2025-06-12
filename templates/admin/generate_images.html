@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Doctor Images - Bloom Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .info-card {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .info-list {
+            text-align: left;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+        }
+
+        .status-card {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .status-card.show {
+            display: block;
+        }
+
+        .progress-container {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .generate-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .status-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .generate-btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🎨</div>
+        <h1>Doctor Image Generator</h1>
+        <p class="subtitle">Generate AI-powered professional portraits for all specialists</p>
+
+        <div class="info-card">
+            <h3>🔮 What This Does</h3>
+            <ul class="info-list">
+                <li>Generates professional AI portraits for all 22 doctors in your database</li>
+                <li>Uses Google Vertex AI Imagen for high-quality, realistic images</li>
+                <li>Creates specialty-specific portraits (gynecologists, therapists, etc.)</li>
+                <li>Automatically updates the doctors.json file with new image paths</li>
+                <li>Images are optimized for web display and deployment</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>⚡ Requirements</h3>
+            <ul class="info-list">
+                <li>Google Cloud Project with Vertex AI enabled</li>
+                <li>GOOGLE_CLOUD_PROJECT environment variable configured</li>
+                <li>Estimated cost: ~$0.44 (22 images × $0.02 each)</li>
+                <li>Processing time: 3-5 minutes</li>
+            </ul>
+        </div>
+
+        <div class="status-card" id="statusCard">
+            <h3>📊 Generation Status</h3>
+            <div class="stats" id="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalDoctors">0</div>
+                    <div class="stat-label">Total Doctors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="generatedCount">0</div>
+                    <div class="stat-label">Generated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="progressPercentage">0%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Generating AI images... This may take a few minutes.</p>
+        </div>
+
+        <div id="messageArea"></div>
+
+        <div>
+            <button class="generate-btn" id="generateBtn" onclick="generateImages()">
+                🚀 Generate All Images
+            </button>
+            <button class="status-btn" onclick="checkStatus()">
+                📊 Check Status
+            </button>
+        </div>
+
+        <a href="/consultation" class="back-link">← Back to Consultation</a>
+    </div>
+
+    <script>
+        function showMessage(message, type = 'info') {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="message ${type}">${message}</div>`;
+        }
+
+        function updateProgress(data) {
+            document.getElementById('totalDoctors').textContent = data.total_doctors;
+            document.getElementById('generatedCount').textContent = data.generated_count;
+            document.getElementById('progressPercentage').textContent = data.progress_percentage + '%';
+            document.getElementById('progressBar').style.width = data.progress_percentage + '%';
+            document.getElementById('statusCard').classList.add('show');
+        }
+
+        async function generateImages() {
+            const generateBtn = document.getElementById('generateBtn');
+            const loading = document.getElementById('loading');
+            
+            generateBtn.disabled = true;
+            loading.classList.add('show');
+            showMessage('Starting image generation process...', 'info');
+
+            try {
+                const response = await fetch('/api/generate-doctor-images', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showMessage(data.message, 'success');
+                    
+                    // Start polling for status updates
+                    const pollInterval = setInterval(async () => {
+                        const statusResponse = await fetch('/api/check-image-generation-status');
+                        const statusData = await statusResponse.json();
+                        
+                        if (statusData.success) {
+                            updateProgress(statusData);
+                            
+                            if (statusData.progress_percentage >= 100) {
+                                clearInterval(pollInterval);
+                                loading.classList.remove('show');
+                                generateBtn.disabled = false;
+                                showMessage('🎉 All images generated successfully! Images are now available in your consultation page.', 'success');
+                            }
+                        }
+                    }, 5000); // Check every 5 seconds
+
+                } else {
+                    showMessage('❌ Error: ' + data.error, 'error');
+                    loading.classList.remove('show');
+                    generateBtn.disabled = false;
+                }
+            } catch (error) {
+                showMessage('❌ Network error: ' + error.message, 'error');
+                loading.classList.remove('show');
+                generateBtn.disabled = false;
+            }
+        }
+
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/check-image-generation-status');
+                const data = await response.json();
+
+                if (data.success) {
+                    updateProgress(data);
+                    if (data.generated_count === 0) {
+                        showMessage('No AI-generated images found. Click "Generate All Images" to start.', 'info');
+                    } else if (data.progress_percentage >= 100) {
+                        showMessage('✅ All images have been generated successfully!', 'success');
+                    } else {
+                        showMessage(`📊 Progress: ${data.generated_count}/${data.total_doctors} images generated (${data.progress_percentage}%)`, 'info');
+                    }
+                } else {
+                    showMessage('❌ Error checking status: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showMessage('❌ Network error: ' + error.message, 'error');
+            }
+        }
+
+        // Check status on page load
+        window.addEventListener('load', checkStatus);
+    </script>
+</body>
+</html>

@@ -13,6 +13,8 @@ from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 import secrets
+import threading
+from pathlib import Path
 
 # Load environment variables (prioritize system env vars over .env file)
 try:
@@ -2259,6 +2261,94 @@ def get_symptom_logs():
         return jsonify({'success': True, 'data': data})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
+# Image Generation Routes for Doctor Portraits
+@app.route('/admin/generate-images')
+def admin_generate_images():
+    """Admin page for generating doctor images"""
+    return render_template('admin/generate_images.html')
+
+@app.route('/api/generate-doctor-images', methods=['POST'])
+def generate_doctor_images():
+    """API endpoint to generate images for all doctors using Vertex AI"""
+    try:
+        # Import the image generator
+        from generate_doctor_images import DoctorImageGenerator
+        
+        # Get project ID from environment or request
+        project_id = os.environ.get('GOOGLE_CLOUD_PROJECT')
+        if not project_id:
+            return jsonify({
+                'success': False, 
+                'error': 'Google Cloud Project ID not configured'
+            }), 400
+        
+        # Initialize the generator
+        generator = DoctorImageGenerator(project_id)
+        
+        # Start image generation in a background thread
+        def generate_images():
+            try:
+                generator.generate_all_images(batch_size=3, delay=1.0)
+            except Exception as e:
+                print(f"Error in background image generation: {str(e)}")
+        
+        # Start the generation process
+        thread = threading.Thread(target=generate_images)
+        thread.daemon = True
+        thread.start()
+        
+        return jsonify({
+            'success': True, 
+            'message': 'Image generation started in background. This may take several minutes.'
+        })
+        
+    except ImportError:
+        return jsonify({
+            'success': False, 
+            'error': 'Image generation module not available'
+        }), 500
+    except Exception as e:
+        return jsonify({
+            'success': False, 
+            'error': f'Failed to start image generation: {str(e)}'
+        }), 500
+
+@app.route('/api/check-image-generation-status')
+def check_image_generation_status():
+    """Check the status of image generation"""
+    try:
+        # Check how many doctors have AI-generated images
+        doctors_path = Path(app.static_folder) / 'data' / 'doctors.json'
+        images_path = Path(app.static_folder) / 'Images'
+        
+        with open(doctors_path, 'r') as f:
+            data = json.load(f)
+            doctors = data.get('doctors', [])
+        
+        total_doctors = len(doctors)
+        generated_count = 0
+        
+        for doctor in doctors:
+            image_path = doctor.get('image', '')
+            if image_path.startswith('Images/ai_generated_'):
+                # Check if file actually exists
+                full_path = images_path / image_path.replace('Images/', '')
+                if full_path.exists():
+                    generated_count += 1
+        
+        return jsonify({
+            'success': True,
+            'total_doctors': total_doctors,
+            'generated_count': generated_count,
+            'progress_percentage': round((generated_count / total_doctors) * 100, 1)
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
