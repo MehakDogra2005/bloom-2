@@ -42,7 +42,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load from localStorage or start at 0
     let currentWater = parseInt(localStorage.getItem('currentWaterIntake')) || 0;
-
+    
+    // Search functionality for Ayurvedic remedies
+    const searchInput = document.querySelector('.search-box input');
+    const searchButton = document.querySelector('.search-box button');
+    const remedyCards = document.querySelectorAll('.remedy-grid .recipe-card');
+    
+    function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            // If search is empty, show all cards
+            remedyCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            return;
+        }
+        
+        remedyCards.forEach(card => {
+            // Search in title, badge, and description
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const badge = card.querySelector('.recipe-badge')?.textContent.toLowerCase() || '';
+            const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+            const meta = card.querySelector('.recipe-meta')?.textContent.toLowerCase() || '';
+            
+            if (title.includes(searchTerm) || 
+                badge.includes(searchTerm) || 
+                description.includes(searchTerm) || 
+                meta.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+    // Add event listeners for search
+    if (searchButton) {
+        searchButton.addEventListener('click', performSearch);
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
     function updateWaterDisplay() {
         const percentage = (currentWater / dailyGoal) * 100;
         const liters = (currentWater / 1000).toFixed(1);
@@ -64,46 +112,79 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    updateWaterDisplay(); // Initialize UI with saved or 0 value
-
-    // Ayurveda Section - Filter and Search
+    updateWaterDisplay(); // Initialize UI with saved or 0 value    // Ayurveda Section - Filter and Search
     const ayurvedaCategoryButtons = document.querySelectorAll('#ayurveda .category-btn');
     const ayurvedaSearchInput = document.querySelector('#ayurveda .search-box input');
-    const ayurvedaCards = document.querySelectorAll('#ayurveda .recipe-card');
+    const ayurvedaSearchButton = document.querySelector('#ayurveda .search-box button');
+    const ayurvedaCards = document.querySelectorAll('#ayurveda .remedy-grid .recipe-card');
     let currentAyurvedaCategory = 'All';
     let ayurvedaSearchTerm = '';
     
-    ayurvedaCategoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            ayurvedaCategoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            currentAyurvedaCategory = this.textContent;
-            filterAndSearchAyurveda();
-        });
-    });
-    
-    if (ayurvedaSearchInput) {
-        ayurvedaSearchInput.addEventListener('input', function() {
-            ayurvedaSearchTerm = this.value.toLowerCase();
-            filterAndSearchAyurveda();
-        });
-    }
-    
+    // Combined filtering and search functionality
     function filterAndSearchAyurveda() {
         ayurvedaCards.forEach(card => {
             const badgeElem = card.querySelector('.recipe-badge');
             const badge = badgeElem ? badgeElem.textContent : '';
-            const title = card.querySelector('h3').textContent.toLowerCase();
-            const description = card.querySelector('p').textContent.toLowerCase();
             
-            const matchesCategory = currentAyurvedaCategory === 'All' || badge.includes(currentAyurvedaCategory);
+            // Get all searchable content
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+            const meta = card.querySelector('.recipe-meta')?.textContent.toLowerCase() || '';
+            
+            // Category filtering
+            const matchesCategory = currentAyurvedaCategory === 'All' || 
+                                   badge.includes(currentAyurvedaCategory);
+            
+            // Search filtering
             const matchesSearch = ayurvedaSearchTerm === '' || 
-                                title.includes(ayurvedaSearchTerm) || 
-                                description.includes(ayurvedaSearchTerm);
+                                 title.includes(ayurvedaSearchTerm) || 
+                                 badge.toLowerCase().includes(ayurvedaSearchTerm) ||
+                                 description.includes(ayurvedaSearchTerm) ||
+                                 meta.includes(ayurvedaSearchTerm);
             
+            // Show card only if it matches both category and search criteria
             card.style.display = matchesCategory && matchesSearch ? 'block' : 'none';
         });
     }
+    
+    // Add category button event listeners
+    ayurvedaCategoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            ayurvedaCategoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            // Update current category
+            currentAyurvedaCategory = this.textContent;
+            // Filter based on new category
+            filterAndSearchAyurveda();
+        });
+    });
+    
+    // Add search event listeners
+    if (ayurvedaSearchButton) {
+        ayurvedaSearchButton.addEventListener('click', function() {
+            ayurvedaSearchTerm = ayurvedaSearchInput.value.toLowerCase().trim();
+            filterAndSearchAyurveda();
+        });
+    }
+    
+    if (ayurvedaSearchInput) {
+        ayurvedaSearchInput.addEventListener('input', function() {
+            ayurvedaSearchTerm = this.value.toLowerCase().trim();
+            filterAndSearchAyurveda();
+        });
+        
+        ayurvedaSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                ayurvedaSearchTerm = this.value.toLowerCase().trim();
+                filterAndSearchAyurveda();
+            }
+        });
+    }
+    
+    // Initialize filtering
+    filterAndSearchAyurveda();
 
     // Recipe Section - Filter Functionality
     const phaseFilter = document.querySelector('.recipe-filters select:first-child');
@@ -151,27 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
     profileButton.addEventListener('click', function() {
         alert('Opening Profile Settings');
         // In a real app, this would open the user profile
-    });
+    });    // REMOVED DUPLICATE SEARCH FUNCTIONALITY DECLARATION
 
-    // Search Functionality
-    const searchBox = document.querySelector('.search-box input');
-    const searchButton = document.querySelector('.search-box button');
-    // Declare remedyCards ONCE here
-    const remedyCards = document.querySelectorAll('.remedy-grid .recipe-card');
-
-    function performSearch() {
-        const searchTerm = searchBox.value.trim().toLowerCase();
-        remedyCards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = searchTerm === '' || text.includes(searchTerm) ? 'block' : 'none';
-        });
-    }
-
-    if (searchButton && searchBox) {
-        searchButton.addEventListener('click', performSearch);
-        searchBox.addEventListener('input', performSearch); // Filter as you type
-        searchBox.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') performSearch();
-        });
-    }
+    // REMOVED REDUNDANT SEARCH FUNCTIONALITY
 });
