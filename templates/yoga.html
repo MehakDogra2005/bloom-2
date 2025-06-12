@@ -253,17 +253,20 @@
         }        .pose-card {
             background-color: white;
             border-radius: var(--rounded);
-            padding: 15px;
+            padding: 20px;
             box-shadow: var(--shadow);
             transition: var(--transition);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            text-align: center;
+            border: 2px solid transparent;
         }
 
         .pose-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--soft-pink);
         }
 
         .pose-card:active {
@@ -287,20 +290,33 @@
         }
 
         .pose-card h4 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #5a4a6a;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.3;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pose-icon-small {
-            font-size: 40px;
+            font-size: 48px;
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0 20px 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pose-tags {
             display: flex;
             gap: 5px;
             flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
         }
 
         .tag {
@@ -523,14 +539,17 @@
 
         .popup-body {
             padding: 25px;
-        }
-
-        .pose-image {
+        }        .pose-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            object-position: center;
             border-radius: var(--rounded);
             margin-bottom: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            display: block;
         }
 
         .section {
@@ -779,7 +798,39 @@
     </div>    <script>
         // Sample data for yoga poses - will be replaced with exercise.json data
         let yogaPoses = [];
-        let exerciseData = [];        // Load exercise data from exercise.json
+        let exerciseData = [];        // Image URL mapping for yoga poses
+        const poseImageMap = {
+            "Adho Mukha Svanasana (Downward Facing Dog)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_adho_mukha_svanasana_downward_facing_dog.jpg",
+            "Ananda Balasana (Happy Baby Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_ananda_balasana_happy_baby_pose.jpg",
+            "Apanasana (Knees-to-Chest Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_apanasana_knees_to_chest_pose.jpg",
+            "Ardha Matsyendrasana (Half Spinal Twist)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_ardha_matsyendrasana_half_spinal_twist.jpg",
+            "Balasana (Child's Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_balasana_childs_pose.jpg",
+            "Bharadvajasana (Seated Twist)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_bharadvajasana_seated_twist.jpg",
+            "Bhujangasana (Cobra Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_bhujangasana.jpg",
+            "Dhanurasana (Bow Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_dhanurasana_bow_pose.jpg",
+            "Gomukhasana (Cow Face Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_gomukhasana_cow_face_pose.jpg",
+            "Halasana (Plow Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_halasana_plow_pose.jpg",
+            "Janu Sirsasana (Head-to-Knee Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_janu_sirsasana_head_to_knee_pose.jpg",
+            "Malasana (Garland Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_malasana_garland_pose.jpg",
+            "Marjaryasana-Bitilasana (Cat-Cow Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_marjaryasana_bitilasana_cat_cow_pose.jpg",
+            "Matsyasana (Fish Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_matsyasana.jpg",
+            "Parivrtta Trikonasana (Revolved Triangle Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_parivrtta.jpg",
+            "Parsvottanasana (Intense Side Stretch Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_parsvottanasana_intense_side_stretch_pose.jpg",
+            "Paschimottanasana (Seated Forward Bend)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_paschimottanasana.jpg",
+            "Salamba Sarvangasana (Supported Shoulderstand)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_salamba.jpg",
+            "Savasana (Corpse Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_savasana_corpse_pose.jpg",
+            "Setu Bandhasana (Bridge Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_setu.jpg",
+            "Supta Baddha Konasana (Reclining Bound Angle Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_supta_baddha_konasana_reclining_bound_angle_pose.jpg",
+            "Supta Padangusthasana (Reclining Hand-to-Big-Toe Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_supta_padangusthasana_reclining_hand_to_big_toe_pose.jpg",
+            "Ustrasana (Camel Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_ustrasana_camel_pose.jpg",
+            "Uttanasana (Standing Forward Bend)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_uttanasana_standing_forward_bend.jpg",
+            "Utthita Trikonasana (Extended Triangle Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_utthita_trikonasana_extended_triangle_pose.jpg",
+            "Viparita Karani (Legs-up-the-Wall Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_viparita.jpg",
+            "Virabhadrasana II (Warrior II Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_virabhadrasana_ii_warrior_ii_pose.jpg",
+            "Virasana (Hero Pose)": "https://storage.googleapis.com/polished-bridge-462015-d8-yoga-pose-images/poses/yoga_pose_virasana_hero_pose.jpg"
+        };
+
+        // Load exercise data from yoga.json
         async function loadExerciseData() {
             try {
                 // Show loading state
@@ -791,19 +842,25 @@
                     </div>
                 `;
 
-                const response = await fetch('/api/exercises');
+                const response = await fetch('/static/data/yoga.json');
                 if (!response.ok) {
-                    throw new Error('Failed to load exercise data');
+                    throw new Error('Failed to load yoga data');
                 }
                 exerciseData = await response.json();
                 
-                // Transform exercise data to match yogaPoses format
+                // Transform yoga data to match yogaPoses format
                 yogaPoses = exerciseData.map(exercise => ({
                     name: exercise.name,
-                    icon: getIconForType(exercise.type),
-                    tags: [capitalizeFirst(exercise.type)],
-                    description: exercise.instructions.substring(0, 60) + "...",
-                    exerciseData: exercise // Store full data for popup
+                    icon: getIconForPose(exercise.name),
+                    tags: getTagsForPose(exercise),
+                    description: exercise.steps ? exercise.steps[0].substring(0, 60) + "..." : "Yoga pose for wellness",
+                    exerciseData: {
+                        ...exercise,
+                        image: poseImageMap[exercise.name] || '/static/Images/meditation-figure.png',
+                        instructions: exercise.steps ? exercise.steps.join(' ') : 'Follow the pose instructions carefully.',
+                        type: getTypeForPose(exercise),
+                        idealTime: exercise.duration || '1-2 minutes'
+                    }
                 }));
                 
                 // Populate the pose library after data is loaded
@@ -811,43 +868,99 @@
                 populatePoseSelector();
                 
             } catch (error) {
-                console.error('Error loading exercise data:', error);
+                console.error('Error loading yoga data:', error);
                 // Show error state
                 poseGrid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">
                         <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 16px; color: #dc3545;"></i>
                         <h3>Failed to load yoga poses</h3>
-                        <p>There was an error loading the yoga pose data. Using fallback data.</p>
+                        <p>There was an error loading the yoga pose data. Please try refreshing the page.</p>
                     </div>
                 `;
-                
-                // Fallback to sample data if loading fails
-                yogaPoses = [
-                    { name: "Sukhasana (Easy Pose)", icon: "🧘‍♀️", tags: ["Meditative"], description: "Calms the mind and relieves stress" },
-                    { name: "Balasana (Child's Pose)", icon: "🙇‍♀️", tags: ["Relief"], description: "Gently stretches the hips and lower back" },
-                    { name: "Vrikshasana (Tree Pose)", icon: "🌳", tags: ["Mix"], description: "Improves balance and focus" },
-                    { name: "Marjaryasana (Cat Pose)", icon: "🐱", tags: ["Relief"], description: "Stretches the back and relieves tension" },
-                    { name: "Bitilasana (Cow Pose)", icon: "🐄", tags: ["Relief"], description: "Increases spinal flexibility" },
-                    { name: "Adho Mukha Svanasana (Downward Dog)", icon: "🦮", tags: ["Mix"], description: "Strengthens and stretches the whole body" },
-                    { name: "Bhujangasana (Cobra Pose)", icon: "🐍", tags: ["Relief"], description: "Stretches the abdomen and chest" },
-                    { name: "Supta Baddha Konasana (Reclining Butterfly)", icon: "🦋", tags: ["Meditative", "Relief"], description: "Relaxes the hips and groin" },
-                    { name: "Viparita Karani (Legs-Up-the-Wall)", icon: "🦵", tags: ["Meditative", "Relief"], description: "Relieves tired legs and improves circulation" },
-                    { name: "Savasana (Corpse Pose)", icon: "😴", tags: ["Meditative"], description: "Deep relaxation for body and mind" }
-                ];
-                setTimeout(() => {
-                    populatePoseLibrary();
-                    populatePoseSelector();
-                }, 2000);
             }
-        }
-
-        function getIconForType(type) {
+        }        function getIconForType(type) {
             const icons = {
                 'meditative': '🧘‍♀️',
                 'relief': '🙇‍♀️',
                 'mixed': '🌳'
             };
             return icons[type] || '🧘‍♀️';
+        }        function getIconForPose(poseName) {
+            // Assign person-based emojis for each yoga pose
+            const poseIcons = {
+                'Balasana': '🙇‍♀️',              // Child's Pose - bowing person
+                'Savasana': '🧘‍♀️',                // Corpse Pose - meditation person
+                'Supta Baddha Konasana': '🤸‍♀️',   // Reclining Bound Angle - gymnastics person
+                'Viparita Karani': '🤸‍♀️',         // Legs up the wall - gymnastics person
+                'Adho Mukha Svanasana': '🧘‍♀️',   // Downward Dog - meditation person
+                'Bhujangasana': '🤸‍♀️',            // Cobra Pose - gymnastics person
+                'Marjaryasana-Bitilasana': '🧘‍♀️', // Cat-Cow - meditation person
+                'Ustrasana': '🤸‍♀️',               // Camel Pose - gymnastics person
+                'Dhanurasana': '🤸‍♀️',             // Bow Pose - gymnastics person
+                'Matsyasana': '🧘‍♀️',              // Fish Pose - meditation person
+                'Halasana': '🤸‍♀️',                // Plow Pose - gymnastics person
+                'Virabhadrasana': '🧘‍♀️',          // Warrior - meditation person
+                'Utthita Trikonasana': '🧘‍♀️',     // Triangle Pose - meditation person
+                'Parivrtta Trikonasana': '🤸‍♀️',   // Revolved Triangle - gymnastics person
+                'Malasana': '🧘‍♀️',               // Garland/Squat - meditation person
+                'Gomukhasana': '🧘‍♀️',             // Cow Face Pose - meditation person
+                'Virasana': '🧘‍♀️',                // Hero Pose - meditation person
+                'Ananda Balasana': '🤸‍♀️',         // Happy Baby - gymnastics person
+                'Janu Sirsasana': '🧘‍♀️',          // Head to Knee - meditation person
+                'Supta Padangusthasana': '🤸‍♀️', // Reclining Hand-to-Big-Toe - gymnastics person
+                'Paschimottanasana': '🧘‍♀️',       // Seated Forward Bend - meditation person
+                'Uttanasana': '🙇‍♀️',              // Standing Forward Bend - bowing person
+                'Parsvottanasana': '🧘‍♀️',         // Intense Side Stretch - meditation person
+                'Bharadvajasana': '🧘‍♀️',          // Seated Twist - meditation person
+                'Ardha Matsyendrasana': '🧘‍♀️',    // Half Spinal Twist - meditation person
+                'Salamba Sarvangasana': '🤸‍♀️',    // Shoulderstand - gymnastics person
+                'Setu Bandhasana': '🤸‍♀️',         // Bridge Pose - gymnastics person
+                'Apanasana': '🤗',               // Knees to Chest - hugging person
+                'Supta Virasana': '🧘‍♀️',          // Reclining Hero - meditation person
+                'Parivrtta Janu Sirsasana': '🧘‍♀️' // Revolved Head-to-Knee - meditation person
+            };
+            
+            // Extract the Sanskrit name (before the parentheses)
+            const sanskritName = poseName.split(' (')[0];
+            return poseIcons[sanskritName] || '🧘‍♀️';
+        }
+
+        function getTagsForPose(exercise) {
+            const tags = [];
+            
+            // Categorize based on relieved symptoms and benefits
+            const symptoms = exercise.relievesSymptoms || [];
+            const benefits = exercise.benefits || [];
+            
+            const meditativeKeywords = ['stress', 'anxiety', 'calm', 'nervous', 'relaxation', 'mind'];
+            const reliefKeywords = ['cramps', 'pain', 'tension', 'bloating', 'fatigue', 'headache'];
+            
+            const hasMeditative = [...symptoms, ...benefits].some(item => 
+                meditativeKeywords.some(keyword => 
+                    item.toLowerCase().includes(keyword)
+                )
+            );
+            
+            const hasRelief = [...symptoms, ...benefits].some(item => 
+                reliefKeywords.some(keyword => 
+                    item.toLowerCase().includes(keyword)
+                )
+            );
+            
+            if (hasRelief) tags.push('Relief');
+            if (hasMeditative) tags.push('Meditative');
+            if (!hasRelief && !hasMeditative) tags.push('General');
+            if (hasRelief && hasMeditative) tags.push('Mixed');
+            
+            return tags;
+        }
+
+        function getTypeForPose(exercise) {
+            const tags = getTagsForPose(exercise);
+            if (tags.includes('Mixed')) return 'mixed';
+            if (tags.includes('Relief')) return 'relief';
+            if (tags.includes('Meditative')) return 'meditative';
+            return 'general';
         }
 
         function capitalizeFirst(str) {
@@ -887,7 +1000,7 @@
             popupImage.src = poseData.image || '/static/Images/meditation-figure.png';
             popupImage.alt = poseData.name;
             popupInstructions.textContent = poseData.instructions || 'Instructions not available for this pose.';
-            popupIdealTime.textContent = poseData.idealTime || `${Math.floor((poseData.duration || 60) / 60)}:${((poseData.duration || 60) % 60).toString().padStart(2, '0')} minutes`;
+            popupIdealTime.textContent = poseData.idealTime || poseData.duration || '1-2 minutes';
 
             // Populate benefits
             popupBenefits.innerHTML = '';
@@ -946,8 +1059,7 @@
                 
                 // Add click event to show popup
                 poseCard.addEventListener('click', () => {
-                    const exerciseDetails = pose.exerciseData || exerciseData.find(e => e.name === pose.name.split(' (')[0]) || {};
-                    showPosePopup(exerciseDetails);
+                    showPosePopup(pose.exerciseData);
                 });
                 
                 poseGrid.appendChild(poseCard);
@@ -997,11 +1109,9 @@
                     <div class="pose-icon-small">${pose.icon}</div>
                     <div class="pose-tags">${tagsHTML}</div>
                 `;
-                
-                // Add click event to show popup
+                  // Add click event to show popup
                 poseCard.addEventListener('click', () => {
-                    const exerciseDetails = pose.exerciseData || exerciseData.find(e => e.name === pose.name.split(' (')[0]) || {};
-                    showPosePopup(exerciseDetails);
+                    showPosePopup(pose.exerciseData);
                 });
                 
                 poseGrid.appendChild(poseCard);
