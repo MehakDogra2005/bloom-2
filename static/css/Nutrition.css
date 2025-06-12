@@ -1,0 +1,708 @@
+/* ======================== */
+/* Bloom Dashboard - Soft Pastel Theme */
+/* ======================== */
+
+/* Updated Color Variables */
+:root {
+  /* Core Palette */
+  --bloom-lavender: #e8dff5;
+  --bloom-blush: #f7e4ed;
+  --bloom-plum: #b28fb2;
+  --bloom-rose: #e0b8d0;
+  --bloom-cream: #f9f5f0;
+  --bloom-charcoal: #4a4a4a;
+  --bloom-brown: #7a6d6d;
+  --bloom-white: #ffffff;
+  --bloom-active: #9a7bb8;
+  
+  /* Semantic Colors */
+  --primary-color: var(--bloom-plum);
+  --primary-dark: #8a6aae;
+  --primary-light: var(--bloom-lavender);
+  --accent-color: #e8b5ce;
+  --text-dark: var(--bloom-charcoal);
+  
+  /* Extended Pastels */
+  --pastel-peach: #ffdfd3;
+  --pastel-mint: #d4f1f0;
+  --pastel-lilac: #dcd0ff;
+  --pastel-lavender: #eae4f5;
+  --pastel-blush: #f9eef2;
+
+  /* Utility Colors */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --border-light: 1px solid rgba(0,0,0,0.03);
+}
+
+/* ======================== */
+/* Base Styles */
+/* ======================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+  background-color: var(--bloom-cream);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: var(--bloom-charcoal);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--bloom-brown);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ======================== */
+/* Layout Structure */
+/* ======================== */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.content-sections {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.content-section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.content-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======================== */
+/* Sidebar Styles */
+/* ======================== */
+.main-sidebar {
+  background-color: var(--bloom-white);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.sidebar-header {
+  padding: 0 1.25rem 1.25rem;
+  border-bottom: 1px solid var(--bloom-lavender);
+  margin-bottom: 1rem;
+}
+
+.sidebar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.sidebar-item {
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin: 0.25rem 0.75rem;
+  border-radius: 8px;
+}
+
+.sidebar-item:hover {
+  background-color: color-mix(in srgb, var(--bloom-lavender) 80%, white);
+}
+
+.sidebar-item.active {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-active));
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-icon {
+  margin-right: 0.75rem;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.sidebar-text {
+  font-size: 0.95rem;
+}
+
+/* ======================== */
+/* Cards & Containers */
+/* ======================== */
+.card {
+  background-color: var(--bloom-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: var(--border-light);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: var(--primary-dark);
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ======================== */
+/* Buttons & Interactive Elements */
+/* ======================== */
+.btn {
+  border-radius: 24px;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--bloom-rose), var(--bloom-plum));
+  color: var(--bloom-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--bloom-lavender);
+  color: var(--primary-dark);
+}
+
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--bloom-lavender) 80%, white);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ======================== */
+/* Water Tracker */
+/* ======================== */
+.water-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.water-bottle {
+  width: 150px;
+  height: 300px;
+  background-color: var(--bloom-white);
+  border-radius: 0 0 40px 40px;
+  border: 4px solid color-mix(in srgb, var(--primary-color) 70%, white);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.water-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, var(--pastel-lilac), var(--bloom-lavender));
+  transition: height 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.water-amount {
+  color: var(--bloom-white);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.water-markings {
+  position: absolute;
+  right: -30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.water-markings span {
+  font-size: 0.8rem;
+  color: var(--text-dark);
+}
+
+.water-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.water-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--bloom-rose), var(--bloom-plum));
+  color: var(--bloom-white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.water-btn:hover {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  transform: translateY(-2px);
+}
+
+.water-progress {
+  margin-top: 1.25rem;
+}
+
+.water-progress span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: var(--bloom-lavender);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--bloom-rose), var(--bloom-plum));
+  transition: width 0.5s ease;
+}
+
+/* ======================== */
+/* Ayurvedic Remedies */
+/* ======================== */
+.search-box {
+  display: flex;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--bloom-lavender);
+  border-radius: 25px 0 0 25px;
+  font-size: 1rem;
+  outline: none;
+  background-color: var(--bloom-white);
+}
+
+.search-box button {
+  padding: 0 1.25rem;
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  color: var(--bloom-white);
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+  opacity: 0.9;
+}
+
+.remedy-categories {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.5rem 1rem;
+  background-color: color-mix(in srgb, var(--bloom-lavender) 60%, white);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  color: var(--bloom-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.remedy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.remedy-card {
+  background-color: var(--bloom-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.remedy-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.remedy-image {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  background-color: var(--pastel-blush);
+}
+
+.remedy-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.remedy-info {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.remedy-info h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+}
+
+.remedy-benefit {
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.remedy-desc {
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  flex-grow: 1;
+}
+
+.remedy-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.save-remedy {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--bloom-lavender);
+  transition: color 0.3s ease;
+}
+
+.save-remedy:hover {
+  color: var(--accent-color);
+}
+
+.save-remedy.saved {
+  color: var(--accent-color);
+}
+
+/* ======================== */
+/* Recipe Cards */
+/* ======================== */
+.recipe-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.recipe-filters select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--bloom-lavender);
+  border-radius: 8px;
+  background-color: var(--bloom-white);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.recipe-carousel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.recipe-card {
+  background-color: var(--bloom-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.recipe-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.recipe-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-active));
+  color: var(--bloom-white);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.recipe-info {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-info h3 {
+  margin-bottom: 0.75rem;
+  color: var(--primary-dark);
+  font-size: 1.15rem;
+}
+
+.recipe-info p {
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  font-size: 0.85rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.view-recipe {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  color: var(--bloom-white);
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.view-recipe:hover {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-active));
+}
+
+/* ======================== */
+/* Wellness Tips */
+/* ======================== */
+.tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background-color: var(--bloom-white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.tip-card h3 {
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+}
+
+.tip-card p {
+  color: var(--text-dark);
+  margin-bottom: 1.25rem;
+}
+
+.tip-action {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-rose));
+  color: var(--bloom-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.tip-action:hover {
+  background: linear-gradient(135deg, var(--bloom-plum), var(--bloom-active));
+}
+
+/* ======================== */
+/* Responsive Design */
+/* ======================== */
+@media (max-width: 992px) {
+  .water-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .remedy-grid, .tips-container {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .water-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .remedy-grid, .tips-container {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .content-sections {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .recipe-carousel, .remedy-grid, .tips-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .recipe-filters {
+    flex-direction: column;
+  }
+  
+  .water-bottle {
+    width: 120px;
+    height: 240px;
+  }
+}
+
+/* ======================== */
+/* Utility Classes */
+/* ======================== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.text-center { text-align: center; }
+.text-accent { color: var(--accent-color); }
+.text-primary { color: var(--primary-color); }

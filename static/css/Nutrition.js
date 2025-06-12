@@ -1,0 +1,177 @@
+// Nutrition.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation functionality - now handled by sidebar dropdown
+    const contentSections = document.querySelectorAll('.content-section');
+    
+    // Create global nutrition app object for sidebar interaction
+    window.nutritionApp = {
+        showSection: function(sectionId) {
+            // Remove active class from all sections
+            contentSections.forEach(section => section.classList.remove('active'));
+            
+            // Show corresponding section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update dropdown item active state
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => item.classList.remove('active'));
+            
+            const activeDropdownItem = document.querySelector(`[data-section="${sectionId}"]`);
+            if (activeDropdownItem) {
+                activeDropdownItem.classList.add('active');
+            }
+        }
+    };
+    
+    // Initialize with default section (water-tracker) or from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialSection = urlParams.get('section') || 'water-tracker';
+    window.nutritionApp.showSection(initialSection);
+
+    // Water Tracker Functionality
+    const waterButtons = document.querySelectorAll('.water-btn');
+    const waterFill = document.querySelector('.water-fill');
+    const waterAmount = document.querySelector('.water-amount');
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.water-progress span');
+    const dailyGoal = 2000; // 2L in ml
+
+    // Load from localStorage or start at 0
+    let currentWater = parseInt(localStorage.getItem('currentWaterIntake')) || 0;
+
+    function updateWaterDisplay() {
+        const percentage = (currentWater / dailyGoal) * 100;
+        const liters = (currentWater / 1000).toFixed(1);
+        if (waterFill) waterFill.style.height = `${percentage}%`;
+        if (waterAmount) waterAmount.textContent = `${liters}L`;
+        if (progressFill) progressFill.style.width = `${percentage}%`;
+        if (progressText) progressText.textContent = `${Math.round(percentage)}% of daily goal`;
+    }
+
+    waterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let amount = 0;
+            if (this.textContent.includes('250')) amount = 250;
+            if (this.textContent.includes('500')) amount = 500;
+            currentWater += amount;
+            if (currentWater > dailyGoal) currentWater = dailyGoal;
+            localStorage.setItem('currentWaterIntake', currentWater); // Save to localStorage
+            updateWaterDisplay();
+        });
+    });
+
+    updateWaterDisplay(); // Initialize UI with saved or 0 value
+
+    // Ayurveda Section - Filter and Search
+    const ayurvedaCategoryButtons = document.querySelectorAll('#ayurveda .category-btn');
+    const ayurvedaSearchInput = document.querySelector('#ayurveda .search-box input');
+    const ayurvedaCards = document.querySelectorAll('#ayurveda .recipe-card');
+    let currentAyurvedaCategory = 'All';
+    let ayurvedaSearchTerm = '';
+    
+    ayurvedaCategoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            ayurvedaCategoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            currentAyurvedaCategory = this.textContent;
+            filterAndSearchAyurveda();
+        });
+    });
+    
+    if (ayurvedaSearchInput) {
+        ayurvedaSearchInput.addEventListener('input', function() {
+            ayurvedaSearchTerm = this.value.toLowerCase();
+            filterAndSearchAyurveda();
+        });
+    }
+    
+    function filterAndSearchAyurveda() {
+        ayurvedaCards.forEach(card => {
+            const badgeElem = card.querySelector('.recipe-badge');
+            const badge = badgeElem ? badgeElem.textContent : '';
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            
+            const matchesCategory = currentAyurvedaCategory === 'All' || badge.includes(currentAyurvedaCategory);
+            const matchesSearch = ayurvedaSearchTerm === '' || 
+                                title.includes(ayurvedaSearchTerm) || 
+                                description.includes(ayurvedaSearchTerm);
+            
+            card.style.display = matchesCategory && matchesSearch ? 'block' : 'none';
+        });
+    }
+
+    // Recipe Section - Filter Functionality
+    const phaseFilter = document.querySelector('.recipe-filters select:first-child');
+    const mealFilter = document.querySelector('.recipe-filters select:last-child');
+    const recipeCards = document.querySelectorAll('.recipe-card');
+
+    function filterRecipes() {
+        const selectedPhase = phaseFilter.value;
+        const selectedMeal = mealFilter.value;
+        recipeCards.forEach(card => {
+            const phase = card.getAttribute('data-phase') || 'All';
+            const meal = card.getAttribute('data-meal') || 'All';
+            // Show all if both filters are 'All'
+            const show = (selectedPhase === 'All' && selectedMeal === 'All') ||
+                         (selectedPhase === 'All' && meal.includes(selectedMeal)) ||
+                         (selectedMeal === 'All' && phase.includes(selectedPhase)) ||
+                         (phase.includes(selectedPhase) && meal.includes(selectedMeal));
+            card.style.display = show ? 'block' : 'none';
+        });
+    }
+
+    phaseFilter.addEventListener('change', filterRecipes);
+    mealFilter.addEventListener('change', filterRecipes);
+
+    // Initial filter
+    filterRecipes();
+
+    // View Recipe Buttons
+    document.querySelectorAll('.view-recipe').forEach(button => {
+        button.addEventListener('click', function() {
+            const recipeName = this.closest('.recipe-info').querySelector('h3').textContent;
+            window.location.href = `/remedy/${encodeURIComponent(recipeName)}`;
+        });
+    });
+
+    // Home Button
+    const homeButton = document.querySelector('.home');
+    homeButton.addEventListener('click', function() {
+        alert('Navigating to Home Screen');
+        // In a real app, this would navigate to the home page
+    });
+
+    // Profile Button
+    const profileButton = document.querySelector('.profile');
+    profileButton.addEventListener('click', function() {
+        alert('Opening Profile Settings');
+        // In a real app, this would open the user profile
+    });
+
+    // Search Functionality
+    const searchBox = document.querySelector('.search-box input');
+    const searchButton = document.querySelector('.search-box button');
+    // Declare remedyCards ONCE here
+    const remedyCards = document.querySelectorAll('.remedy-grid .recipe-card');
+
+    function performSearch() {
+        const searchTerm = searchBox.value.trim().toLowerCase();
+        remedyCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = searchTerm === '' || text.includes(searchTerm) ? 'block' : 'none';
+        });
+    }
+
+    if (searchButton && searchBox) {
+        searchButton.addEventListener('click', performSearch);
+        searchBox.addEventListener('input', performSearch); // Filter as you type
+        searchBox.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+    }
+});

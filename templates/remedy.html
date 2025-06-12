@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Remedies - Bloom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common-sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/remedy.css') }}">
+</head>
+<body class="sidebar-layout">
+    <!-- Common Sidebar -->
+    {% include 'includes/sidebar.html' %}
+      <div class="main-content">
+        <!-- Hero Section -->
+        <div class="remedy-hero">
+            <div class="hero-background"></div>            <div class="hero-content">
+                <button class="back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <h1 class="page-title">Natural Remedies</h1>
+                <p class="page-subtitle">Discover the power of nature's healing</p>
+            </div>
+        </div>
+
+        <div class="remedy-list-container">
+        {% if remedies %}
+            {% for remedy in remedies %}
+                <div class="remedy-card">
+                    <div class="remedy-header">
+                        <div class="remedy-image-container">
+                            <img src="{{ remedy.image }}" alt="{{ remedy.name or remedy.title }}" class="remedy-image"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-remedy.png') }}'">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="remedy-meta">
+                            <h2 class="remedy-title">{{ remedy.name or remedy.title }}</h2>
+                            <div class="remedy-badges">
+                                <span class="remedy-badge">{{ remedy.badge }}</span>
+                            </div>
+                            <div class="remedy-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{ remedy.time }}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-fire"></i>
+                                    <span>{{ remedy.calories }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="remedy-description">
+                        <p>{{ remedy.description }}</p>
+                    </div>
+
+                    <div class="remedy-content">
+                        <div class="remedy-section ingredients-section">
+                            <div class="section-header">
+                                <i class="fas fa-leaf"></i>
+                                <h3>Ingredients</h3>
+                            </div>
+                            <ul class="ingredient-list">
+                                {% for ingredient in remedy.ingredients %}
+                                <li class="ingredient-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>{{ ingredient }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="remedy-section steps-section">
+                            <div class="section-header">
+                                <i class="fas fa-list-ol"></i>
+                                <h3>Preparation Steps</h3>
+                            </div>
+                            <ol class="steps-list">
+                                {% for step in remedy.steps %}
+                                <li class="step-item">{{ step }}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+
+                        <div class="remedy-section benefits-section">
+                            <div class="section-header">
+                                <i class="fas fa-heart"></i>
+                                <h3>Health Benefits</h3>
+                            </div>
+                            <ul class="benefits-list">
+                                {% for benefit in remedy.benefits %}
+                                <li class="benefit-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>{{ benefit }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="remedy-footer">
+                        <button class="action-btn save-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Save Recipe
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+                
+                {% if not loop.last %}
+                <div class="remedy-divider"></div>
+                {% endif %}
+            {% endfor %}
+        {% elif remedy %}
+            <!-- fallback: single remedy view -->
+            <div class="remedy-card">
+                <div class="remedy-header">
+                    <div class="remedy-image-container">
+                        <img src="{{ remedy.image }}" alt="{{ remedy.name or remedy.title }}" class="remedy-image"
+                             onerror="this.src='{{ url_for('static', filename='images/default-remedy.png') }}'">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="remedy-meta">
+                        <h2 class="remedy-title">{{ remedy.name or remedy.title }}</h2>
+                        <div class="remedy-badges">
+                            <span class="remedy-badge">{{ remedy.badge }}</span>
+                        </div>
+                        <div class="remedy-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                <span>{{ remedy.time }}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-fire"></i>
+                                <span>{{ remedy.calories }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="remedy-description">
+                    <p>{{ remedy.description }}</p>
+                </div>
+
+                <div class="remedy-content">
+                    <div class="remedy-section ingredients-section">
+                        <div class="section-header">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Ingredients</h3>
+                        </div>
+                        <ul class="ingredient-list">
+                            {% for ingredient in remedy.ingredients %}
+                            <li class="ingredient-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>{{ ingredient }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="remedy-section steps-section">
+                        <div class="section-header">
+                            <i class="fas fa-list-ol"></i>
+                            <h3>Preparation Steps</h3>
+                        </div>
+                        <ol class="steps-list">
+                            {% for step in remedy.steps %}
+                            <li class="step-item">{{ step }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+
+                    <div class="remedy-section benefits-section">
+                        <div class="section-header">
+                            <i class="fas fa-heart"></i>
+                            <h3>Health Benefits</h3>
+                        </div>
+                        <ul class="benefits-list">
+                            {% for benefit in remedy.benefits %}
+                            <li class="benefit-item">
+                                <i class="fas fa-star"></i>
+                                <span>{{ benefit }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="remedy-footer">
+                    <button class="action-btn save-btn">
+                        <i class="fas fa-bookmark"></i>
+                        Save Recipe
+                    </button>
+                    <button class="action-btn share-btn">
+                        <i class="fas fa-share-alt"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>    
+    <script src="{{ url_for('static', filename='js/common-sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/remedy.js') }}"></script>
+</body>
+</html>
+
+
+

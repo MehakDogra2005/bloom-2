@@ -1,0 +1,1131 @@
+{
+  "remedies": [
+    {
+      "name": "Ajwain Water",
+      "badge": "Bloating",
+      "description": "Relieves bloating by improving digestion and reducing gas.",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/ajwain-water.png",
+      "ingredients": [
+        "1 tsp ajwain (carom seeds)",
+        "1 cup water",
+        "Optional: 1/4 tsp black salt"
+      ],
+      "steps": [
+        "Measure 1 tsp ajwain seeds and check for impurities.",
+        "In a small saucepan, bring 1 cup of water to a boil.",
+        "Add the ajwain seeds to the boiling water.",
+        "Reduce the heat and let it simmer gently for 2-3 minutes to extract the oils.",
+        "Turn off the heat, cover the pan, and let it steep for another 2 minutes.",
+        "Strain the water into a cup using a fine mesh sieve.",
+        "Add black salt if desired and stir well.",
+        "Allow to cool slightly until warm (not hot) before drinking.",
+        "Sip slowly, preferably after meals for best results."
+      ],
+      "benefits": [
+        "Reduces bloating and gas.",
+        "Stimulates digestive enzymes.",
+        "Relieves acidity and heartburn."
+      ]
+    },
+    {
+      "name": "Fennel Tea",
+      "badge": "Bloating",
+      "description": "Reduces bloating and calms the digestive tract.",
+      "calories": "N/A",
+      "time": "10 min",
+      "image": "Images/fennel-tea.png",
+      "ingredients": [
+        "1 tsp fennel seeds",
+        "1.5 cups water",
+        "Optional: ginger, honey, or cinnamon stick"
+      ],
+      "steps": [
+        "Lightly crush the fennel seeds with a mortar and pestle to release their oils.",
+        "Bring 1.5 cups of water to a boil in a small pot.",
+        "Add the fennel seeds (and ginger if using) to the boiling water.",
+        "Reduce heat, cover, and simmer for 5-7 minutes.",
+        "Turn off the heat, add a cinnamon stick if desired, and let steep for 2 more minutes.",
+        "Strain the tea into a cup using a fine mesh strainer.",
+        "If sweetening, add honey only when the tea has cooled slightly.",
+        "Drink 20 minutes before meals or whenever experiencing bloating.",
+        "Chew the leftover fennel seeds for additional digestive support."
+      ],
+      "benefits": [
+        "Relaxes intestinal muscles.",
+        "Acts as a natural diuretic.",
+        "Freshens breath."
+      ]
+    },
+    {
+      "name": "Triphala Powder",
+      "badge": "Bloating",
+      "description": "Supports digestion and relieves chronic bloating.",
+      "calories": "N/A",
+      "time": "2 min",
+      "image": "Images/triphala.png",
+      "ingredients": [
+        "1/2 tsp triphala powder",
+        "1 cup warm water"
+      ],
+      "steps": [
+        "Boil water and let it cool for 2-3 minutes until warm but not hot.",
+        "Place the triphala powder in a small bowl.",
+        "Add a tablespoon of warm water to the powder and mix into a paste.",
+        "Gradually add the remaining water while stirring continuously to prevent clumping.",
+        "Drink immediately before the mixture settles.",
+        "For first-time users, start with 1/4 tsp and gradually increase to 1/2 tsp over a week.",
+        "Best consumed on an empty stomach before bedtime for gentle overnight cleansing.",
+        "Rinse mouth after drinking as triphala can temporarily stain teeth."
+      ],
+      "benefits": [
+        "Detoxifies the digestive tract.",
+        "Balances all three doshas.",
+        "Improves nutrient absorption."
+      ]
+    },
+    {
+      "name": "Ginger Elixir",
+      "badge": "Bloating",
+      "description": "Boosts metabolism and alleviates gas and bloating.",
+      "calories": "N/A",
+      "time": "7 min",
+      "image": "Images/ginger.png",
+      "ingredients": [
+        "1.5 inch fresh ginger root",
+        "2 cups water",
+        "1 tbsp lemon juice",
+        "1 tsp honey",
+        "Optional: pinch of cayenne"
+      ],
+      "steps": [
+        "Wash and scrub the ginger root thoroughly.",
+        "Grate the ginger using a fine grater or microplane.",
+        "Add the grated ginger and 2 cups of water to a saucepan.",
+        "Bring to a gentle boil over medium heat.",
+        "Once boiling, reduce heat and simmer uncovered for 5 minutes.",
+        "Strain the liquid into a cup using a fine mesh sieve.",
+        "Allow to cool for 1 minute, then stir in lemon juice and honey.",
+        "Add a pinch of cayenne if desired and mix well.",
+        "Sip slowly, enjoying the warmth and aroma."
+      ],
+      "benefits": [
+        "Increases digestive fire.",
+        "Relieves nausea and bloating.",
+        "Anti-inflammatory."
+      ]
+    },
+    {
+      "name": "CCF Tea",
+      "badge": "Bloating",
+      "description": "A blend of cumin, coriander, and fennel seeds to ease digestion and bloating.",
+      "calories": "N/A",
+      "time": "10 min",
+      "image": "Images/cumin-coriander-fennel.png",
+      "ingredients": [
+        "1/2 tsp cumin seeds",
+        "1/2 tsp coriander seeds",
+        "1/2 tsp fennel seeds",
+        "3 cups water"
+      ],
+      "steps": [
+        "Measure out all three seeds separately.",
+        "In a dry skillet over medium-low heat, lightly toast each seed type for 30 seconds until fragrant.",
+        "Combine toasted seeds in a mortar and gently crush to release oils.",
+        "Bring 3 cups of water to a rolling boil in a saucepan.",
+        "Add the crushed seeds and immediately reduce heat to the lowest setting.",
+        "Cover and simmer for exactly 7 minutes.",
+        "Remove from heat and let stand covered for 2 more minutes.",
+        "Strain into a teapot or directly into cups.",
+        "Drink warm, especially after meals."
+      ],
+      "benefits": [
+        "Enhances digestion.",
+        "Relieves gas and bloating.",
+        "Balances hormones."
+      ]
+    },
+    {
+      "name": "Hing (Asafoetida) Water",
+      "badge": "Bloating",
+      "description": "Powerful remedy for bloating and abdominal discomfort.",
+      "calories": "N/A",
+      "time": "3 min",
+      "image": "Images/hing-water.png",
+      "ingredients": [
+        "1/8 tsp hing powder",
+        "1 cup warm water",
+        "1 tsp ghee or coconut oil"
+      ],
+      "steps": [
+        "Use a precise 1/8 teaspoon measure for the hing.",
+        "Heat water to just below boiling (about 180°F).",
+        "In a small bowl, mix hing powder with 1 tbsp of the warm water to form a smooth paste.",
+        "Add ghee or coconut oil to the remaining water and stir well.",
+        "Slowly whisk the hing paste into the water-oil mixture until fully incorporated.",
+        "Drink immediately while warm, in small sips.",
+        "For chronic issues, take 2-3 times daily before meals for up to 1 week."
+      ],
+      "benefits": [
+        "Relaxes GI tract muscles.",
+        "Works quickly to relieve gas.",
+        "Helps with IBS symptoms."
+      ]
+    },
+    {
+      "name": "Warm Lemon Honey Water",
+      "badge": "Pain Relief and Bloating",
+      "description": "Stimulates digestion and helps flush out excess gas.",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/lemon-honey.png",
+      "ingredients": [
+        "1/2 lemon",
+        "1.5 cups warm water",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Warm the water until just hot to touch.",
+        "Slice lemon thinly and muddle in a mug to release juices.",
+        "Add warm water and let steep for 2 minutes.",
+        "Remove lemon slices.",
+        "Stir in honey until dissolved.",
+        "Drink first thing in the morning, wait 30 minutes before eating.",
+        "Rinse mouth after drinking to protect tooth enamel."
+      ],
+      "benefits": [
+        "Alkalizes the body.",
+        "Stimulates liver bile.",
+        "Honey provides prebiotics."
+      ]
+    },
+    {
+      "name": "Shatavari Powder",
+      "badge": "Hormone Balance",
+      "description": "Balances estrogen and supports reproductive health.",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/shatavari.png",
+      "ingredients": [
+        "1/2 tsp shatavari powder",
+        "1 cup warm almond or coconut milk",
+        "1/4 tsp cardamom powder"
+      ],
+      "steps": [
+        "Warm your choice of milk until steaming but not boiling.",
+        "Mix shatavari powder and cardamom with 1 tbsp milk to make a paste.",
+        "Gradually whisk in the rest of the milk until fully incorporated.",
+        "Drink in the evening about 1 hour before bedtime.",
+        "Store any unused powder in an airtight container in the refrigerator for up to 3 days."
+      ],
+      "benefits": [
+        "Balances estrogen.",
+        "Nourishes reproductive tissues.",
+        "Supports fertility."
+      ]
+    },
+    {
+      "name": "Ashwagandha Tea",
+      "badge": "Hormone Balance",
+      "description": "Helps regulate cortisol and thyroid hormone levels.",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/ashwagandha-hormone.png",
+      "ingredients": [
+        "1/2 tsp ashwagandha powder",
+        "1 cup hot water",
+        "1/4 tsp cinnamon powder"
+      ],
+      "steps": [
+        "Boil water and let cool for 2 minutes to reach optimal temperature.",
+        "Mix ashwagandha and cinnamon with 1 tbsp hot water to make a paste.",
+        "Slowly add the rest of the water, stirring to avoid clumps.",
+        "Drink in the afternoon for best results.",
+        "Use a straw to drink if concerned about temporary teeth staining from herbs."
+      ],
+      "benefits": [
+        "Reduces cortisol.",
+        "Supports thyroid function.",
+        "Increases stamina."
+      ]
+    },
+    {
+      "name": "Flaxseed Water",
+      "badge": "Hormone Balance",
+      "description": "Supports hormonal balance and menstrual regularity.",
+      "calories": "N/A",
+      "time": "2 min",
+      "image": "Images/flaxseeds.png",
+      "ingredients": [
+        "1 tbsp flaxseeds",
+        "1 cup water"
+      ],
+      "steps": [
+        "Soak flaxseeds overnight.",
+        "Strain and drink the water in the morning."
+      ],
+      "benefits": [
+        "Rich in lignans for hormone balance.",
+        "Supports regular cycles.",
+        "Anti-inflammatory."
+      ]
+    },
+    {
+      "name": "Aloe Vera Juice",
+      "badge": "Hormone Balance and Pain Relief",
+      "description": "Maintains hormonal levels and soothes PCOS symptoms.",
+      "calories": "N/A",
+      "time": "3 min",
+      "image": "Images/aloevera-juice.png",
+      "ingredients": [
+        "2 tbsp aloe vera gel (fresh or store-bought)",
+        "1 cup water",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Blend aloe vera gel with water and honey.",
+        "Drink on an empty stomach in the morning."
+      ],
+      "benefits": [
+        "Soothes inflammation.",
+        "Supports hormonal balance.",
+        "Aids digestion."
+      ]
+    },
+    {
+      "name": "Sesame Ladoo",
+      "badge": "Hormone Balance",
+      "description": "Rich in zinc and calcium, supports female hormones.",
+      "calories": "120",
+      "time": "20 min",
+      "image": "Images/sesame-ladoo.png",
+      "ingredients": [
+        "1 cup sesame seeds",
+        "1/2 cup jaggery",
+        "1/4 cup ghee"
+      ],
+      "steps": [
+        "Roast sesame seeds, melt jaggery with ghee.",
+        "Mix together, form into balls.",
+        "Cool and store in airtight container."
+      ],
+      "benefits": [
+        "Rich in minerals for hormone health.",
+        "Boosts energy.",
+        "Supports bone strength."
+      ]
+    },
+    {
+      "name": "Methi Seed Water",
+      "badge": "Hormone Balance",
+      "description": "Improves insulin sensitivity and hormonal balance.",
+      "calories": "N/A",
+      "time": "Soak Overnight",
+      "image": "Images/methi-seeds.png",
+      "ingredients": [
+        "1 tsp methi (fenugreek) seeds",
+        "1 cup water"
+      ],
+      "steps": [
+        "Soak methi seeds overnight in water.",
+        "Drink the water and chew the seeds in the morning."
+      ],
+      "benefits": [
+        "Improves insulin sensitivity.",
+        "Supports hormone balance.",
+        "Reduces menstrual cramps."
+      ]
+    },
+    {
+      "name": "Hormone-Balancing Kitchari",
+      "badge": "Hormone Balance and Energy Boost",
+      "description": "Easy-to-digest meal with balancing spices for hormonal support.",
+      "calories": "320",
+      "time": "30 min",
+      "image": "Images/hormone-kitchari.png",
+      "ingredients": [
+        "1/2 cup split mung dal",
+        "1/2 cup basmati rice",
+        "1 tbsp ghee",
+        "1 tsp cumin seeds",
+        "1 tsp coriander powder",
+        "1/2 tsp turmeric",
+        "2 cups water",
+        "Salt to taste"
+      ],
+      "steps": [
+        "Wash rice and dal, heat ghee in a pot.",
+        "Add cumin, coriander, turmeric, then rice and dal.",
+        "Add water and salt, bring to boil, simmer until soft.",
+        "Serve warm."
+      ],
+      "benefits": [
+        "Balances hormones.",
+        "Easy to digest.",
+        "Detoxifies the body."
+      ]
+    },
+    {
+      "name": "Shatavari Elixir",
+      "badge": "Hormonal Balance and Pain Relief",
+      "description": "Balances estrogen levels and eases PMS or menopausal discomfort.",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/shatavari-elixir.png",
+      "ingredients": [
+        "1/2 tsp shatavari powder",
+        "1 cup warm milk",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Mix shatavari powder in warm milk.",
+        "Add honey and stir well.",
+        "Drink before bedtime."
+      ],
+      "benefits": [
+        "Balances estrogen.",
+        "Eases PMS and menopause symptoms.",
+        "Supports reproductive health."
+      ]
+    },
+    {
+      "name": "Flaxseed Water",
+      "badge": "Bloating and Hormone Balance",
+      "description": "Supports hormone balance and reduces inflammation naturally.",
+      "calories": "N/A",
+      "time": "10 min",
+      "image": "Images/flaxseed-water.png",
+      "ingredients": [
+        "1 tbsp flaxseeds",
+        "1 cup water"
+      ],
+      "steps": [
+        "Soak flaxseeds in water for 10 minutes.",
+        "Stir and drink the mixture."
+      ],
+      "benefits": [
+        "Rich in omega-3s.",
+        "Reduces inflammation.",
+        "Supports hormone balance."
+      ]
+    },
+    {
+      "name": "Chasteberry Infusion",
+      "badge": "Pain Relief and Hormone Balance",
+      "description": "Promotes progesterone production and eases cycle-related pain.",
+      "calories": "N/A",
+      "time": "7 min",
+      "image": "Images/chasteberry-tea.png",
+      "ingredients": [
+        "1 tsp dried chasteberry",
+        "1 cup boiling water"
+      ],
+      "steps": [
+        "Steep chasteberry in boiling water for 7 minutes.",
+        "Strain and drink warm."
+      ],
+      "benefits": [
+        "Promotes progesterone.",
+        "Eases PMS and cramps.",
+        "Supports cycle regularity."
+      ]
+    },
+    {
+      "name": "Evening Primrose Oil",
+      "badge": "Pain Relief and Hormone Balance",
+      "description": "Supports hormonal health and reduces breast tenderness and cramps.",
+      "calories": "N/A",
+      "time": "Daily",
+      "image": "Images/evening-primrose.png",
+      "ingredients": [
+        "1-2 capsules evening primrose oil (supplement)"
+      ],
+      "steps": [
+        "Take 1-2 capsules daily with food, as directed by your healthcare provider."
+      ],
+      "benefits": [
+        "Reduces breast tenderness.",
+        "Eases cramps.",
+        "Supports hormonal balance."
+      ]
+    },
+    {
+      "name": "Seed Cycling Mix",
+      "badge": "Hormone Balance",
+      "description": "Rotating flax, pumpkin, sesame & sunflower seeds to regulate hormones.",
+      "calories": "N/A",
+      "time": "2 min",
+      "image": "Images/seed-cycling.png",
+      "ingredients": [
+        "1 tbsp flaxseeds",
+        "1 tbsp pumpkin seeds",
+        "1 tbsp sesame seeds",
+        "1 tbsp sunflower seeds"
+      ],
+      "steps": [
+        "Grind seeds fresh daily.",
+        "Eat flax and pumpkin seeds during follicular phase (days 1-14).",
+        "Eat sesame and sunflower seeds during luteal phase (days 15-28)."
+      ],
+      "benefits": [
+        "Regulates menstrual cycle.",
+        "Supports hormone production.",
+        "Rich in essential fatty acids."
+      ]
+    },
+    {
+      "name": "Chyawanprash Spoon",
+      "badge": "Immunity and Energy Boost",
+      "description": "Classic herbal jam rich in amla and 40+ herbs to enhance energy and immunity.",
+      "calories": "40",
+      "time": "1 min",
+      "image": "Images/chyawanprash.png",
+      "ingredients": [
+        "1 tsp chyawanprash"
+      ],
+      "steps": [
+        "Take 1 tsp chyawanprash daily in the morning, plain or with warm milk."
+      ],
+      "benefits": [
+        "Boosts immunity.",
+        "Enhances energy.",
+        "Rich in antioxidants."
+      ]
+    },
+    {
+      "name": "Dates & Almond Shake",
+      "badge": "Iron-rich and Energy Boost",
+      "description": "Blended dates, almonds, and warm milk for a quick energy and strength boost.",
+      "calories": "180",
+      "time": "10 min",
+      "image": "Images/dates-almond-shake.png",
+      "ingredients": [
+        "5 dates, pitted",
+        "10 almonds, soaked",
+        "1 cup warm milk"
+      ],
+      "steps": [
+        "Blend dates and almonds with milk until smooth.",
+        "Serve warm."
+      ],
+      "benefits": [
+        "Rich in iron and calcium.",
+        "Boosts energy.",
+        "Strengthens bones."
+      ]
+    },
+    {
+      "name": "Moringa Tea",
+      "badge": "Energy Boost",
+      "description": "Rich in iron and vitamin C, moringa helps fight fatigue and restores vitality.",
+      "calories": "N/A",
+      "time": "7 min",
+      "image": "Images/moringa-tea.png",
+      "ingredients": [
+        "1 tsp moringa powder",
+        "1 cup hot water",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Mix moringa powder in hot water.",
+        "Add honey and stir well.",
+        "Drink warm."
+      ],
+      "benefits": [
+        "Boosts energy.",
+        "Rich in antioxidants.",
+        "Supports immune health."
+      ]
+    },
+    {
+      "name": "Ashwagandha Latte",
+      "badge": "Energy Boost",
+      "description": "Balances stress hormones and supports sustained energy throughout the day.",
+      "calories": "N/A",
+      "time": "8 min",
+      "image": "Images/ashwagandha-latte.png",
+      "ingredients": [
+        "1/2 tsp ashwagandha powder",
+        "1 cup milk (dairy or plant-based)",
+        "1/4 tsp cinnamon",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Warm milk, whisk in ashwagandha and cinnamon.",
+        "Add honey and blend until frothy.",
+        "Drink warm."
+      ],
+      "benefits": [
+        "Reduces stress.",
+        "Supports energy and focus.",
+        "Balances hormones."
+      ]
+    },
+    {
+      "name": "Beetroot & Carrot Soup",
+      "badge": "Digestive",
+      "description": "Detoxifying soup rich in antioxidants.",
+      "calories": "180",
+      "time": "35 min",
+      "image": "Images/4h.png",
+      "ingredients": [
+        "1 beetroot, peeled and diced",
+        "2 carrots, chopped",
+        "1 onion, chopped",
+        "2 cups vegetable broth",
+        "1 tsp olive oil",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Heat oil, sauté onion, add beetroot and carrots.",
+        "Add broth, simmer until veggies are soft.",
+        "Blend until smooth, season and serve."
+      ],
+      "benefits": [
+        "Rich in antioxidants.",
+        "Supports liver detox.",
+        "Improves digestion."
+      ]
+    },
+    {
+      "name": "Flaxseed & Banana Smoothie",
+      "badge": "Hormone Balance",
+      "description": "Omega-3 rich smoothie for hormonal health.",
+      "calories": "250",
+      "time": "10 min",
+      "image": "Images/5h.png",
+      "ingredients": [
+        "1 banana",
+        "1 tbsp flaxseed meal",
+        "1 cup milk (dairy or plant-based)",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Blend all ingredients until smooth.",
+        "Serve chilled."
+      ],
+      "benefits": [
+        "Rich in omega-3s.",
+        "Supports hormone balance.",
+        "Boosts energy."
+      ]
+    },
+    {
+      "name": "Turmeric Golden Milk",
+      "badge": "Anti-inflammatory",
+      "description": "Healing drink with turmeric and almond milk.",
+      "calories": "150",
+      "time": "10 min",
+      "image": "Images/7h.png",
+      "ingredients": [
+        "1 cup almond milk",
+        "1/2 tsp turmeric powder",
+        "1/4 tsp cinnamon",
+        "1 tsp honey"
+      ],
+      "steps": [
+        "Warm almond milk, whisk in turmeric and cinnamon.",
+        "Add honey and blend until frothy.",
+        "Drink warm."
+      ],
+      "benefits": [
+        "Reduces inflammation.",
+        "Boosts immunity.",
+        "Supports joint health."
+      ]
+    },
+    {
+      "name": "Dates & Nuts Ladoo",
+      "badge": "Energy Boost",
+      "description": "Natural sweet energy balls for fatigue.",
+      "calories": "200",
+      "time": "20 min",
+      "image": "Images/9h.png",
+      "ingredients": [
+        "1 cup dates, pitted",
+        "1/2 cup mixed nuts",
+        "1 tbsp ghee"
+      ],
+      "steps": [
+        "Blend dates and nuts, mix with ghee.",
+        "Form into balls and chill."
+      ],
+      "benefits": [
+        "Boosts energy.",
+        "Rich in minerals.",
+        "Satisfies sweet cravings."
+      ]
+    },
+    {
+      "name": "Coconut Water & Chia Fresca",
+      "badge": "Hydration",
+      "description": "Electrolyte-rich hydrating drink.",
+      "calories": "120",
+      "time": "5 min",
+      "image": "Images/10h.png",
+      "ingredients": [
+        "1 cup coconut water",
+        "1 tbsp chia seeds",
+        "Juice of 1/2 lemon"
+      ],
+      "steps": [
+        "Mix chia seeds in coconut water, let sit 5 min.",
+        "Add lemon juice and stir."
+      ],
+      "benefits": [
+        "Hydrates and replenishes electrolytes.",
+        "Rich in omega-3s.",
+        "Boosts energy."
+      ]
+    },
+    {
+      "name": "Fermented Rice Kanji",
+      "badge": "Gut Health",
+      "description": "Probiotic-rich fermented rice drink.",
+      "calories": "160",
+      "time": "12 hours",
+      "image": "Images/11h.png",
+      "ingredients": [
+        "1/2 cup cooked rice",
+        "2 cups water"
+      ],
+      "steps": [
+        "Soak cooked rice in water overnight.",
+        "Strain and drink the liquid in the morning."
+      ],
+      "benefits": [
+        "Rich in probiotics.",
+        "Improves gut health.",
+        "Aids digestion."
+      ]
+    },
+    {
+      "name": "Cumin & Coriander Tea",
+      "badge": "Bloating",
+      "description": "Digestive tea to reduce bloating.",
+      "calories": "50",
+      "time": "10 min",
+      "image": "Images/12h.png",
+      "ingredients": [
+        "1/2 tsp cumin seeds",
+        "1/2 tsp coriander seeds",
+        "1 cup water"
+      ],
+      "steps": [
+        "Boil water, add seeds, simmer 5 min.",
+        "Strain and drink warm."
+      ],
+      "benefits": [
+        "Reduces bloating.",
+        "Improves digestion.",
+        "Relieves gas."
+      ]
+    },
+    {
+      "name": "Dark Chocolate Oats",
+      "badge": "Mood Boost",
+      "description": "Magnesium-rich breakfast for mood swings.",
+      "calories": "280",
+      "time": "15 min",
+      "image": "Images/13h.png",
+      "ingredients": [
+        "1/2 cup rolled oats",
+        "1 cup milk",
+        "1 tbsp cocoa powder",
+        "1 tbsp dark chocolate chips"
+      ],
+      "steps": [
+        "Cook oats in milk, stir in cocoa and chocolate chips.",
+        "Serve warm."
+      ],
+      "benefits": [
+        "Rich in magnesium.",
+        "Boosts mood.",
+        "Satisfies chocolate cravings."
+      ]
+    },
+    {
+      "name": "Broccoli & Almond Stir-fry",
+      "badge": "Hormone Balance",
+      "description": "Cruciferous veggies for estrogen balance.",
+      "calories": "240",
+      "time": "20 min",
+      "image": "Images/14h.png",
+      "ingredients": [
+        "1 cup broccoli florets",
+        "1/4 cup sliced almonds",
+        "1 tbsp olive oil",
+        "Salt and pepper"
+      ],
+      "steps": [
+        "Heat oil, stir-fry broccoli, add almonds.",
+        "Season and serve."
+      ],
+      "benefits": [
+        "Supports estrogen metabolism.",
+        "Rich in fiber and vitamin E.",
+        "Boosts energy."
+      ]
+    },
+    {
+      "name": "Ginger & Jaggery Tea",
+      "badge": "Pain Relief",
+      "description": "Anti-inflammatory drink for cramps.",
+      "calories": "80",
+      "time": "12 min",
+      "image": "Images/15h.png",
+      "ingredients": [
+        "1 inch ginger, sliced",
+        "1 cup water",
+        "1 tbsp jaggery"
+      ],
+      "steps": [
+        "Boil ginger in water for 10 min.",
+        "Strain, add jaggery, stir to dissolve.",
+        "Drink warm."
+      ],      "benefits": [
+        "Reduces cramps.",
+        "Anti-inflammatory.",
+        "Boosts circulation."
+      ]
+    },
+    {
+      "name": "Quinoa Upma",
+      "badge": "Iron-rich",
+      "description": "High-protein breakfast with quinoa and vegetables",
+      "calories": "320 cal",
+      "time": "25 min",
+      "image": "Images/1h.png",
+      "ingredients": [
+        "1 cup quinoa",
+        "2 cups water",
+        "1 onion, chopped",
+        "1 carrot, diced",
+        "1/2 cup green peas",
+        "1 tsp mustard seeds",
+        "1 tsp cumin seeds",
+        "2 green chilies, chopped",
+        "1 inch ginger, minced",
+        "Salt to taste",
+        "2 tbsp oil",
+        "Fresh coriander for garnish"
+      ],
+      "steps": [
+        "Rinse quinoa thoroughly and soak for 15 minutes.",
+        "Heat oil in a pan, add mustard and cumin seeds.",
+        "Add onions, ginger, and green chilies. Sauté until golden.",
+        "Add carrots and peas, cook for 3-4 minutes.",
+        "Add drained quinoa and stir for 2 minutes.",
+        "Add water and salt, bring to boil.",
+        "Cover and simmer for 15 minutes until quinoa is cooked.",
+        "Garnish with fresh coriander and serve hot."
+      ],
+      "benefits": [
+        "High in protein and iron",
+        "Rich in essential amino acids",
+        "Supports energy levels"
+      ]
+    },
+    {
+      "name": "Palak Tofu Curry",
+      "badge": "Iron Boost",
+      "description": "Iron-rich spinach with protein-packed tofu",
+      "calories": "310 cal",
+      "time": "25 min",
+      "image": "Images/6h.png",
+      "ingredients": [
+        "200g firm tofu, cubed",
+        "2 bunches fresh spinach",
+        "1 onion, chopped",
+        "3 garlic cloves, minced",
+        "1 inch ginger, minced",
+        "2 tomatoes, chopped",
+        "1 tsp cumin seeds",
+        "1 tsp coriander powder",
+        "1/2 tsp turmeric",
+        "1 tsp garam masala",
+        "Salt to taste",
+        "2 tbsp oil",
+        "1/2 cup coconut milk"
+      ],
+      "steps": [
+        "Blanch spinach in boiling water for 2 minutes, then blend to a puree.",
+        "Heat oil in a pan, add cumin seeds.",
+        "Add onions, garlic, and ginger. Sauté until golden.",
+        "Add tomatoes and cook until soft.",
+        "Add spices and cook for 1 minute.",
+        "Add spinach puree and cook for 5 minutes.",
+        "Add tofu cubes and coconut milk.",
+        "Simmer for 8-10 minutes until flavors blend.",
+        "Serve hot with rice or roti."
+      ],
+      "benefits": [
+        "High in iron and protein",
+        "Rich in folate and vitamins",
+        "Supports blood health"
+      ]
+    },
+    {
+      "name": "Spinach & Paneer Paratha",
+      "badge": "High Calcium",
+      "description": "Iron and calcium rich stuffed flatbread",
+      "calories": "280 cal",
+      "time": "30 min",
+      "image": "Images/2h.png",
+      "ingredients": [
+        "1 cup whole wheat flour",
+        "1 cup spinach, finely chopped",
+        "1/2 cup paneer, crumbled",
+        "1 green chili, minced",
+        "1 tsp ginger-garlic paste",
+        "1/2 tsp cumin seeds",
+        "1/2 tsp garam masala",
+        "Salt to taste",
+        "2 tbsp oil",
+        "Water as needed"
+      ],
+      "steps": [
+        "Make dough with flour, salt, and water. Rest for 15 minutes.",
+        "Mix spinach, paneer, spices, and 1 tsp oil for filling.",
+        "Divide dough into portions and roll into circles.",
+        "Place filling in center, seal edges, and roll gently.",
+        "Heat a pan and cook paratha with oil on both sides.",
+        "Press gently while cooking until golden spots appear.",
+        "Serve hot with yogurt or pickle."
+      ],
+      "benefits": [
+        "High in iron and calcium",
+        "Rich in protein",
+        "Supports bone health"
+      ]
+    },
+    {
+      "name": "Moong Dal Chilla",
+      "badge": "Energy Boost",
+      "description": "Protein-packed lentil pancakes with spices",
+      "calories": "220 cal",
+      "time": "20 min",
+      "image": "Images/3h.png",
+      "ingredients": [
+        "1 cup yellow moong dal, soaked",
+        "1/4 cup onion, finely chopped",
+        "1 green chili, minced",
+        "1 tsp ginger, minced",
+        "1/4 cup coriander leaves",
+        "1/2 tsp cumin seeds",
+        "1/4 tsp turmeric",
+        "Salt to taste",
+        "2 tbsp oil",
+        "Water as needed"
+      ],
+      "steps": [
+        "Soak moong dal for 2-3 hours, then grind to a smooth batter.",
+        "Add all ingredients except oil to the batter.",
+        "Mix well and adjust consistency with water.",
+        "Heat a non-stick pan and spread batter like a pancake.",
+        "Drizzle oil around edges and cook until golden.",
+        "Flip and cook the other side until crispy.",
+        "Serve hot with chutney or yogurt."
+      ],
+      "benefits": [
+        "High in plant protein",
+        "Easy to digest",
+        "Provides sustained energy"
+      ]
+    },
+    {
+      "name": "Chana Chaat Salad",
+      "badge": "Protein Rich",
+      "description": "Protein-packed chickpea salad with veggies",
+      "calories": "290 cal",
+      "time": "15 min",
+      "image": "Images/8h.png",
+      "ingredients": [
+        "1 cup boiled chickpeas",
+        "1 cucumber, diced",
+        "1 tomato, diced",
+        "1/4 cup red onion, finely chopped",
+        "1/4 cup mint leaves, chopped",
+        "2 tbsp lemon juice",
+        "1 tsp chaat masala",
+        "1/2 tsp cumin powder",
+        "1/4 tsp black pepper",
+        "Salt to taste",
+        "1 tbsp olive oil"
+      ],
+      "steps": [
+        "Drain and rinse boiled chickpeas.",
+        "Mix chickpeas with diced vegetables.",
+        "Add mint leaves and mix gently.",
+        "Whisk together lemon juice, oil, and spices.",
+        "Pour dressing over salad and toss well.",
+        "Let it marinate for 5 minutes.",
+        "Serve chilled or at room temperature."
+      ],
+      "benefits": [
+        "High in protein and fiber",
+        "Rich in folate",
+        "Supports heart health"
+      ]
+    },
+    {
+      "name": "Sprouted Moong Salad",
+      "badge": "Protein Packed",
+      "description": "High-protein sprouted lentils with veggies",
+      "calories": "210 cal",
+      "time": "15 min",
+      "image": "Images/16h.png",
+      "ingredients": [
+        "1 cup sprouted moong beans",
+        "1/2 cup chopped cucumber",
+        "1/4 cup chopped carrots",
+        "1/4 cup chopped bell pepper",
+        "2 tbsp lemon juice",
+        "1 tsp ginger, minced",
+        "1 green chili, minced",
+        "1/4 cup coriander leaves",
+        "1/2 tsp chaat masala",
+        "Salt to taste",
+        "1 tsp olive oil"
+      ],
+      "steps": [
+        "Steam sprouted moong beans for 3-4 minutes until tender.",
+        "Let them cool completely.",
+        "Mix with all chopped vegetables.",
+        "Add ginger, green chili, and coriander.",
+        "Whisk lemon juice, oil, chaat masala, and salt.",
+        "Pour dressing over salad and mix well.",
+        "Serve fresh or chill for 10 minutes."
+      ],
+      "benefits": [
+        "Rich in complete proteins",
+        "High in enzymes",
+        "Boosts metabolism"
+      ]
+    },
+    {
+      "name": "Iron-Rich Palak Paratha",
+      "badge": "Menstrual • Lunch",
+      "description": "Iron and calcium rich stuffed flatbread, ideal for lunch during the menstrual phase",
+      "calories": "280 cal",
+      "time": "30 min",
+      "image": "Images/3h.png",
+      "ingredients": [
+        "1 cup whole wheat flour",
+        "1.5 cups spinach, blanched and puree",
+        "1 tsp ginger-garlic paste",
+        "1 green chili, minced",
+        "1/2 tsp cumin seeds",
+        "1/4 tsp ajwain seeds",
+        "Salt to taste",
+        "2 tbsp oil",
+        "Water as needed"
+      ],
+      "steps": [
+        "Mix flour with spinach puree, spices, and salt.",
+        "Add water gradually to make soft dough.",
+        "Rest the dough for 20 minutes.",
+        "Divide into portions and roll into circles.",
+        "Cook on a hot pan with oil until golden spots appear.",
+        "Press gently while cooking for even cooking.",
+        "Serve hot with yogurt and pickle."
+      ],
+      "benefits": [
+        "Extremely high in iron",
+        "Rich in folate",
+        "Perfect for menstrual phase nutrition"
+      ]
+    },
+    {
+      "name": "Quinoa & Veggie Bowl",
+      "badge": "Ovulation • Dinner",
+      "description": "Protein-packed bowl to support energy and hormone balance for ovulation dinner",
+      "calories": "320 cal",
+      "time": "25 min",
+      "image": "Images/6h.png",
+      "ingredients": [
+        "1/2 cup quinoa",
+        "1 cup mixed vegetables (broccoli, bell peppers, zucchini)",
+        "1/4 cup chickpeas, cooked",
+        "2 tbsp olive oil",
+        "1 tbsp lemon juice",
+        "1 tsp herbs (oregano, basil)",
+        "1/4 avocado, sliced",
+        "2 tbsp pumpkin seeds",
+        "Salt and pepper to taste"
+      ],
+      "steps": [
+        "Cook quinoa according to package instructions.",
+        "Roast mixed vegetables with olive oil and herbs.",
+        "Season with salt and pepper.",
+        "Arrange quinoa in a bowl as base.",
+        "Top with roasted vegetables and chickpeas.",
+        "Add avocado slices and pumpkin seeds.",
+        "Drizzle with lemon juice and serve."
+      ],
+      "benefits": [
+        "Complete protein source",
+        "Supports hormone production",
+        "Rich in healthy fats"
+      ]
+    },
+    {
+      "name": "Methi Seed Water",
+      "badge": "Hormonal Balance",
+      "description": "Soaked fenugreek seeds regulate blood sugar and support hormonal balance",
+      "calories": "N/A",
+      "time": "Soak Overnight",
+      "image": "Images/methi-seed-water.png",
+      "ingredients": [
+        "1 tsp fenugreek seeds",
+        "1 cup water",
+        "Optional: 1/4 tsp honey",
+        "Optional: few drops lemon juice"
+      ],
+      "steps": [
+        "Soak fenugreek seeds in water overnight (8-10 hours).",
+        "Strain the water in the morning.",
+        "Add honey or lemon juice if desired.",
+        "Drink on empty stomach for best results.",
+        "You can also chew the softened seeds.",
+        "Continue for 2-3 weeks for best results."
+      ],
+      "benefits": [
+        "Regulates blood sugar levels",
+        "Supports hormonal balance",
+        "Aids in weight management"
+      ]
+    },
+    {
+      "name": "Ashwagandha with Warm Milk",
+      "badge": "Energy Boost",
+      "description": "Reduces cortisol and boosts stamina, great for stress and hormone support",
+      "calories": "N/A",
+      "time": "5 min",
+      "image": "Images/ashwagandha-milk.png",
+      "ingredients": [
+        "1 cup warm milk (dairy or plant-based)",
+        "1/2 tsp ashwagandha powder",
+        "1 tsp honey or jaggery",
+        "Pinch of cardamom powder",
+        "Pinch of cinnamon powder",
+        "Few saffron strands (optional)"
+      ],
+      "steps": [
+        "Warm the milk in a saucepan (don't boil).",
+        "Add ashwagandha powder and whisk well.",
+        "Add honey, cardamom, and cinnamon.",
+        "Stir until well combined.",
+        "Add saffron if using.",
+        "Serve warm before bedtime.",
+        "Consume regularly for 2-4 weeks."
+      ],
+      "benefits": [
+        "Reduces stress and cortisol levels",
+        "Improves energy and stamina",
+        "Supports better sleep quality"
+      ]
+    }
+  ]
+}
