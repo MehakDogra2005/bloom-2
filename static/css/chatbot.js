@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     function startRecording() {
         if (recognition && !isRecording) {
             recognition.start();
+            if (micBtn) micBtn.classList.add('recording');
         }
     }
 
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (recognition && isRecording) {
             recognition.stop();
             isRecording = false;
-            micBtn.classList.remove('recording');
+            if (micBtn) micBtn.classList.remove('recording');
         }
     }
 
@@ -322,7 +323,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             <div class="up">
                 <i class="fas fa-user-circle" style="font-size: 24px; color: white;"></i>
                 <div class="message-content">
-                    <p class="message-text">${text}</p>
+                    <p class="message-text">${renderMarkdown(text)}</p>
                     ${attachmentsHtml}
                     <div class="message-actions">
                         <button class="action-btn copy-btn" title="Copy">
@@ -355,7 +356,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             <div class="up">
                 <img src="static/Images/logo1.png" alt="Bloom AI" class="ai-logo">
                 <div class="message-content">
-                    <p class="message-text">${text}</p>
+                    <p class="message-text">${renderMarkdown(text)}</p>
                     <div class="message-actions">
                         <button class="action-btn copy-btn" title="Copy">
                             <i class="far fa-copy"></i>
@@ -1025,8 +1026,6 @@ function formatPrompt(template, userQuery) {
     function addFilePreviewToChat(fileData) {
         const previewDiv = document.createElement('div');
         previewDiv.className = 'file-preview';
-        
-        // Determine icon based on file type
         let iconClass = 'fa-file';
         if (fileData.type === 'photo') {
             iconClass = 'fa-image';
@@ -1034,7 +1033,7 @@ function formatPrompt(template, userQuery) {
             iconClass = 'fa-video';
         } else if (fileData.mimeType === 'application/pdf') {
             iconClass = 'fa-file-pdf';
-        } else if (fileData.mimeType.includes('word')) {
+        } else if (fileData.mimeType && fileData.mimeType.includes('word')) {
             iconClass = 'fa-file-word';
         } else if (fileData.mimeType === 'text/plain') {
             iconClass = 'fa-file-text';
@@ -1043,7 +1042,6 @@ function formatPrompt(template, userQuery) {
         } else if (fileData.mimeType === 'text/csv') {
             iconClass = 'fa-file-csv';
         }
-        
         previewDiv.innerHTML = `
             <div class="preview-header">
                 <i class="fas ${iconClass}"></i>
@@ -1054,18 +1052,15 @@ function formatPrompt(template, userQuery) {
                 </button>
             </div>
         `;
-        
         // Add preview to input area instead of chat messages
         const inputArea = document.querySelector('.input-area');
         const typingWrapper = document.querySelector('.typing-wrapper');
         inputArea.insertBefore(previewDiv, typingWrapper);
-        
         // Enable input after adding preview
         userInput.disabled = false;
         userInput.focus();
-        
         // Update placeholder text
-        userInput.placeholder = `File "${fileData.fileName}" ready to send. Type your message...`;
+        userInput.placeholder = `File \"${fileData.fileName}\" ready to send. Type your message...`;
     }    // Function to remove file preview
     window.removeFilePreview = function(button) {
         const previewDiv = button.closest('.file-preview');
