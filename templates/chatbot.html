@@ -120,6 +120,32 @@
                 };
             }
         });
+
+        // Add mic button speech recognition handler
+        window.addEventListener('DOMContentLoaded', function () {
+            var micBtn = document.getElementById('micBtn');
+            if (micBtn) {
+                micBtn.onclick = function () {
+                    if (!('webkitSpeechRecognition' in window)) {
+                        alert('Speech recognition not supported in this browser.');
+                        return;
+                    }
+                    var recognition = new webkitSpeechRecognition();
+                    recognition.lang = 'en-US';
+                    recognition.interimResults = false;
+                    recognition.maxAlternatives = 1;
+                    recognition.onresult = function(event) {
+                        var transcript = event.results[0][0].transcript;
+                        var userInput = document.getElementById('userInput');
+                        if (userInput) userInput.value = transcript;
+                    };
+                    recognition.onerror = function(event) {
+                        alert('Speech recognition error: ' + event.error);
+                    };
+                    recognition.start();
+                };
+            }
+        });
     </script>
 </body>
 
