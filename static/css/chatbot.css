@@ -711,17 +711,17 @@ body {
 
 /* File Preview Styles */
 .file-preview {
-    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
-    border-radius: 12px;
+    background: #fff;
+    border-radius: 8px;
     margin: 8px 0;
     display: flex;
     align-items: center;
-    animation: slideInUp 0.3s ease-in-out;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-    padding: 12px 18px;
-    min-width: 180px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 10px 16px;
+    min-width: 160px;
     max-width: 350px;
-    color: #fff;
+    color: #333;
+    border: 1px solid #eee;
 }
 
 .file-preview .preview-header {
@@ -734,7 +734,7 @@ body {
 .file-preview .preview-title {
     flex: 1;
     font-size: 15px;
-    color: #fff;
+    color: #333;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -746,22 +746,22 @@ body {
 
 .file-preview .file-size {
     font-size: 12px;
-    color: #f3e6f7;
+    color: #888;
     margin-left: 6px;
 }
 
 .file-preview i.fas {
-    font-size: 20px;
-    color: #fff;
-    background: rgba(255,255,255,0.12);
-    padding: 7px;
-    border-radius: 6px;
+    font-size: 18px;
+    color: #888;
+    background: none;
+    padding: 0;
+    border-radius: 0;
 }
 
 .file-preview .remove-preview {
-    background: rgba(255,255,255,0.18);
+    background: none;
     border: none;
-    color: #fff;
+    color: #888;
     cursor: pointer;
     padding: 6px;
     display: flex;
@@ -775,75 +775,44 @@ body {
 }
 
 .file-preview .remove-preview:hover {
-    background: rgba(255,255,255,0.3);
+    background: #f5f5f5;
+    color: #b33a3a;
 }
 
 .file-preview .remove-preview i {
     font-size: 13px;
 }
 
-/* Message Attachments Styles */
-.message-attachments {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.user-prompt .message-attachments {
-    border-top-color: rgba(255, 255, 255, 0.3);
-}
-
-.ai-prompt .message-attachments {
-    border-top-color: rgba(0, 0, 0, 0.1);
-}
-
-.message-attachment {
+.mic-btn {
+    background: none;
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    margin-bottom: 4px;
-    font-size: 0.9rem;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: color 0.3s, background 0.3s;
+    cursor: pointer;
+    position: relative;
 }
 
-.user-prompt .message-attachment {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+.mic-btn:hover {
+    color: var(--accent-pink);
+    background-color: rgba(255, 158, 210, 0.1);
 }
 
-.ai-prompt .message-attachment {
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--text-color);
+.mic-btn.recording {
+    /* Remove glow/animation */
+    filter: none;
+    animation: none;
 }
 
-.message-attachment i {
-    font-size: 14px;
-    width: 16px;
-    text-align: center;
-}
-
-.attachment-name {
-    flex: 1;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.attachment-size {
-    font-size: 0.8rem;
-    opacity: 0.8;
-    font-weight: normal;
-}
-
-.user-prompt .attachment-size {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.ai-prompt .attachment-size {
-    color: rgba(0, 0, 0, 0.6);
+.mic-btn i.fas.fa-microphone {
+    font-size: 1.2rem;
+    color: inherit;
 }
 
 /* Responsive Design and Layout Fixes */
@@ -916,42 +885,4 @@ body {
     width: 260px !important;
     min-width: 260px !important;
     max-width: 260px !important;
-}
-
-.mic-btn {
-    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    box-shadow: 0 2px 8px rgba(129, 78, 152, 0.15);
-    transition: box-shadow 0.3s, background 0.3s, color 0.3s, filter 0.3s;
-    cursor: pointer;
-    position: relative;
-}
-
-.mic-btn:hover {
-    background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink));
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(129, 78, 152, 0.25);
-}
-
-.mic-btn.recording {
-    animation: mic-glow 1s infinite alternate;
-    filter: drop-shadow(0 0 8px var(--accent-pink));
-}
-
-@keyframes mic-glow {
-    from { box-shadow: 0 0 0 0 var(--accent-pink); }
-    to { box-shadow: 0 0 16px 6px var(--accent-pink); }
-}
-
-.mic-btn i.fas.fa-microphone {
-    font-size: 1.7rem;
-    color: white;
 }
