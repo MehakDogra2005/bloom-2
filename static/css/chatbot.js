@@ -61,15 +61,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     if (clearHistoryBtn) {
         clearHistoryBtn.addEventListener('click', clearChatHistory);
-    }
-
-    // Handle attachment dropdown items
+    }    // Handle attachment dropdown items
     document.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const type = this.getAttribute('data-type');
             handleAttachment(type);
+            // Hide dropdown after selection
+            attachmentDropdown.classList.remove('show');
         });
+    });
+
+    // Toggle attachment dropdown
+    if (attachmentBtn) {
+        attachmentBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            attachmentDropdown.classList.toggle('show');
+        });
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!attachmentBtn.contains(e.target) && !attachmentDropdown.contains(e.target)) {
+            attachmentDropdown.classList.remove('show');
+        }
     });
 
     // Initialize speech recognition
@@ -156,17 +172,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     function initChat() {
         renderChatHistory();
         showWelcomeScreen();
-    }
-
-    // Show welcome screen
+    }    // Show welcome screen
     function showWelcomeScreen() {
-        welcomeScreen.style.display = 'flex';
-        chatMessages.style.display = 'none';
+        console.log('Showing welcome screen');
+        if (welcomeScreen) welcomeScreen.style.display = 'flex';
+        if (chatMessages) chatMessages.style.display = 'none';
         currentChatId = null;
-    }
-
-    // Create new chat
-    function createNewChat() {
+    }    // Create new chat
+    window.createNewChat = function() {
+        console.log('Creating new chat');
         currentChatId = generateChatId();
         chats[currentChatId] = {
             id: currentChatId,
@@ -175,12 +189,21 @@ document.addEventListener('DOMContentLoaded', async function() {
             timestamp: new Date().toISOString()
         };
         saveChats();
-        welcomeScreen.style.display = 'none';
-        chatMessages.style.display = 'block';
+        
+        console.log('Hiding welcome screen, showing chat messages');
+        if (welcomeScreen) welcomeScreen.style.display = 'none';
+        if (chatMessages) {
+            chatMessages.style.display = 'block';
+            console.log('Chat messages display set to block');
+        }
+        
         renderMessages();
         renderChatHistory();
-    }    // Modify sendMessage to handle file uploads
-    sendMessage = async function() {
+        console.log('New chat created:', currentChatId);
+    };// Modify sendMessage to handle file uploads
+    window.sendMessage = async function() {
+        console.log('sendMessage called');
+        
         if (isRecording) {
             stopRecording();
         }
@@ -188,10 +211,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         const message = userInput.value.trim();
         const filePreviews = document.querySelectorAll('.file-preview');
         
-        if ((message === '' && filePreviews.length === 0) || isTyping) return;
+        console.log('Message:', message, 'File previews:', filePreviews.length);
+        
+        if ((message === '' && filePreviews.length === 0) || isTyping) {
+            console.log('Empty message or typing, returning');
+            return;
+        }
 
         // If no current chat exists, create one
         if (!currentChatId) {
+            console.log('Creating new chat');
             createNewChat();
         }
 
@@ -207,7 +236,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             // Clear previews
             filePreviews.forEach(preview => preview.remove());
-        }        // Add user message to chat with attachments
+        }        
+
+        // Add user message to chat with attachments
         const userMessage = {
             sender: 'user',
             text: message,
@@ -215,6 +246,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             attachments: attachments
         };
         
+        console.log('Adding user message:', userMessage);
         chats[currentChatId].messages.push(userMessage);
         saveChats();
         
@@ -223,8 +255,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         // Reset placeholder text
         userInput.placeholder = 'Type a message...';
-          // Force refresh of messages to ensure proper rendering
+          
+        // Force refresh of messages to ensure proper rendering
         setTimeout(() => {
+            console.log('Force refreshing after user message');
             forceRefreshChat();
         }, 100);
         
@@ -241,8 +275,20 @@ document.addEventListener('DOMContentLoaded', async function() {
             hideTypingIndicator();
             generateAIResponse(message);
         }, 1500);
-    };    // Add message to chat
+    };// Add message to chat
     function addMessageToChat(sender, text) {
+        console.log('Adding message to chat:', sender, text);
+        
+        if (!currentChatId) {
+            console.log('No current chat, creating new chat');
+            createNewChat();
+        }
+        
+        if (!chats[currentChatId]) {
+            console.error('Current chat not found:', currentChatId);
+            return;
+        }
+        
         const message = {
             sender,
             text,
@@ -250,9 +296,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         };
         
         chats[currentChatId].messages.push(message);
+        console.log('Message added, total messages:', chats[currentChatId].messages.length);
+        
         saveChats();
-          // Force refresh of messages to ensure proper rendering
+          
+        // Force refresh of messages to ensure proper rendering
         setTimeout(() => {
+            console.log('Force refreshing chat');
             forceRefreshChat();
         }, 50);
         
@@ -260,22 +310,44 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (sender === 'user' && chats[currentChatId].messages.length === 1) {
             updateChatTitle(text);
         }
-    }    // Render all messages in current chat
+    }// Render all messages in current chat
     function renderMessages() {
-        if (!chatMessages) return;
+        if (!chatMessages || !currentChatId || !chats[currentChatId]) {
+            console.log('Cannot render messages - missing elements or chat');
+            return;
+        }
+        
+        console.log('Rendering messages for chat:', currentChatId);
+        console.log('Messages to render:', chats[currentChatId].messages);
         
         // Store current scroll position
-        const wasAtBottom = chatContainer.scrollTop >= (chatContainer.scrollHeight - chatContainer.clientHeight - 50);
+        const wasAtBottom = chatContainer ? 
+            chatContainer.scrollTop >= (chatContainer.scrollHeight - chatContainer.clientHeight - 50) : 
+            true;
         
         chatMessages.innerHTML = '';
         
-        chats[currentChatId]?.messages?.forEach((msg, index) => {
-            if (msg.sender === 'user') {
-                chatMessages.appendChild(createUserMessageElement(msg.text, msg.timestamp, index));
-            } else {
-                chatMessages.appendChild(createAIMessageElement(msg.text, msg.timestamp, index));
-            }
-        });
+        if (chats[currentChatId].messages && chats[currentChatId].messages.length > 0) {
+            chats[currentChatId].messages.forEach((msg, index) => {
+                try {
+                    if (msg.sender === 'user') {
+                        const userElement = createUserMessageElement(msg.text, msg.timestamp, index);
+                        if (userElement) {
+                            chatMessages.appendChild(userElement);
+                        }
+                    } else if (msg.sender === 'assistant') {
+                        const aiElement = createAIMessageElement(msg.text, msg.timestamp, index);
+                        if (aiElement) {
+                            chatMessages.appendChild(aiElement);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error rendering message:', error, msg);
+                }
+            });
+        } else {
+            console.log('No messages to render');
+        }
         
         // Scroll to bottom if we were already at bottom or if it's a new message
         if (wasAtBottom) {
@@ -283,9 +355,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }// Create user message element with all functionality
     function createUserMessageElement(text, timestamp, messageIndex) {
+        console.log('Creating user message element:', text);
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = 'user-prompt';
         messageDiv.dataset.messageIndex = messageIndex;
+        
+        if (!chats[currentChatId] || !chats[currentChatId].messages[messageIndex]) {
+            console.error('Message not found at index:', messageIndex);
+            return messageDiv;
+        }
         
         const message = chats[currentChatId].messages[messageIndex];
         let attachmentsHtml = '';
@@ -317,11 +396,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </div>`;
             }).join('');
             attachmentsHtml += '</div>';
-        }
-        
-        messageDiv.innerHTML = `
+        }        messageDiv.innerHTML = `
             <div class="up">
-                <i class="fas fa-user-circle" style="font-size: 24px; color: white;"></i>
+                <i class="fas fa-user-circle"></i>
                 <div class="message-content">
                     <p class="message-text">${renderMarkdown(text)}</p>
                     ${attachmentsHtml}
@@ -343,11 +420,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Add functionality to buttons
         addMessageFunctionality(messageDiv, text, messageIndex);
         
+        console.log('User message element created successfully');
         return messageDiv;
     }
 
     // Create AI message element with all functionality
     function createAIMessageElement(text, timestamp, messageIndex) {
+        console.log('Creating AI message element:', text);
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = 'ai-prompt';
         messageDiv.dataset.messageIndex = messageIndex;
@@ -378,7 +458,45 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Add functionality to buttons
         addMessageFunctionality(messageDiv, text, messageIndex);
         
+        console.log('AI message element created successfully');
         return messageDiv;
+    }    // Simple markdown renderer for message text
+    function renderMarkdown(text) {
+        if (!text) return '';
+        
+        // Convert text to string if it's not already
+        let textStr = String(text);
+        
+        // Remove excessive asterisks that might cause formatting issues
+        // Replace multiple asterisks with single ones for proper bold formatting
+        textStr = textStr.replace(/\*{3,}/g, '**');
+        
+        // Basic markdown conversions
+        let rendered = textStr
+            // Bold text: **text** or __text__
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/__(.*?)__/g, '<strong>$1</strong>')
+            
+            // Italic text: *text* or _text_ (but not if it's part of bold)
+            .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>')
+            .replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>')
+            
+            // Code blocks: ```code```
+            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+            
+            // Inline code: `code`
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            
+            // Line breaks
+            .replace(/\n/g, '<br>')
+            
+            // Links: [text](url)
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+            
+            // Clean up any remaining single asterisks that weren't part of formatting
+            .replace(/(?<![*<])\*(?![*>])/g, '');
+        
+        return rendered;
     }
 
     // Add functionality to message buttons
@@ -589,9 +707,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Save chats to localStorage
     function saveChats() {
         localStorage.setItem('chats', JSON.stringify(chats));
-    }
-
-    // Show typing indicator
+    }    // Show typing indicator
     function showTypingIndicator() {
         isTyping = true;
         const typingDiv = document.createElement('div');
@@ -608,7 +724,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 </div>
             </div>
         `;
-        chatContainer.appendChild(typingDiv);
+        chatMessages.appendChild(typingDiv);
         scrollToBottom();
     }
 
@@ -648,16 +764,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     }    // Generate chat ID
     function generateChatId() {
         return 'chat-' + Math.random().toString(36).substr(2, 9);
-    }
-
-    // Force refresh the chat UI
+    }    // Force refresh the chat UI
     function forceRefreshChat() {
-        if (!currentChatId) return;
+        if (!currentChatId) {
+            console.log('No current chat to refresh');
+            return;
+        }
+        
+        console.log('Force refreshing chat:', currentChatId);
+        console.log('Current chat data:', chats[currentChatId]);
         
         // Clear and re-render messages
         if (chatMessages) {
             chatMessages.innerHTML = '';
             setTimeout(() => {
+                console.log('Re-rendering messages');
                 renderMessages();
             }, 10);
         }
@@ -819,7 +940,7 @@ function formatPrompt(template, userQuery) {
         saveChats();
     } catch (error) {
         console.error('Error generating AI response:', error);
-        addMessageToChat('assistant', `I apologize, but I encountered an error: ${error.message}. Please try again.`);
+        addMessageToChat('assistant', `I encountered an error: ${error.message}. Please try again.`);
     }
 }
 

@@ -212,10 +212,9 @@ body {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     background-color: var(--cream-bg);
     overflow: hidden;
-    height: 100%;
+    height: calc(100vh - 80px); /* Account for header height */
 }
 
 .chat-container {
@@ -224,6 +223,10 @@ body {
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
+    background: white;
+    margin: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .user-prompt, .ai-prompt {
@@ -235,16 +238,70 @@ body {
 }
 
 .user-prompt {
-    margin-left: auto;
-    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 20%;
+}
+
+.user-prompt .up {
+    max-width: 60%;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex-direction: row-reverse;
+}
+
+.user-prompt .message-content {
+    background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink));
     color: white;
-    box-shadow: 0 2px 6px rgba(255, 158, 210, 0.2);
+    padding: 1rem;
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 2px 8px rgba(185, 152, 189, 0.3);
+    flex: 1;
+}
+
+.user-prompt .message-text {
+    margin: 0;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* User icon styling */
+.user-prompt .fas.fa-user-circle {
+    font-size: 32px !important;
+    color: var(--accent-pink) !important;
+    min-width: 32px;
+    order: 1;
+    margin-right: 0.5rem;
 }
 
 .ai-prompt {
-    margin-right: auto;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ai-prompt .up {
+    max-width: 75%;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.ai-prompt .message-content {
+    background: white;
+    color: var(--text-color);
+    padding: 1rem;
+    border-radius: 18px 18px 18px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--light-gray);
+}
+
+.ai-prompt .message-text {
+    margin: 0;
+    line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .up {
@@ -262,49 +319,67 @@ body {
 .message-actions {
     display: flex;
     gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.user-prompt:hover .message-actions,
+.ai-prompt:hover .message-actions {
+    opacity: 1;
 }
 
 .action-btn {
     background: none;
     border: none;
-    color: var(--text-color);
+    color: currentColor;
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    opacity: 0.6;
 }
 
 .action-btn:hover {
-    background-color: var(--light-gray);
-    transform: scale(1.1);
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-.thumbs-up.active, .thumbs-down.active {
-    color: var(--accent-pink);
+.user-prompt .action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-.input-area {
+/* Message Attachments */
+.message-attachments {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.user-prompt .message-attachments {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.message-attachment {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 25px;
-    margin-top: 1rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
 }
 
-.attachment-btn {
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: color 0.3s;
+.message-attachment:last-child {
+    margin-bottom: 0;
 }
 
-.attachment-btn:hover {
-    color: var(--accent-pink);
+.attachment-name {
+    font-weight: 500;
+}
+
+.attachment-size {
+    opacity: 0.7;
+    font-size: 0.8rem;
 }
 
 .typing-wrapper {
@@ -445,20 +520,151 @@ body {
 /* Toast Notification */
 .toast-notification {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--text-color);
+    top: 20px;
+    right: 20px;
+    background: var(--accent-pink);
     color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .toast-notification.show {
-    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .body {
+        flex-direction: column;
+    }
+    
+    .left {
+        width: 100%;
+        height: auto;
+        max-height: 30vh;
+        border-right: none;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    
+    .right {
+        height: 70vh;
+        margin: 0.5rem;
+    }
+    
+    .chat-container {
+        margin: 0.5rem;
+    }
+    
+    .input-area {
+        padding: 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .attachment-btn,
+    .mic-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .send-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .typing-wrapper {
+        margin: 0 0.25rem;
+    }
+    
+    .user-prompt .up,
+    .ai-prompt .up {
+        max-width: 85%;
+    }
+    
+    .welcome-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .welcome-logo {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 0.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .right {
+        height: calc(100vh - 70px);
+        margin: 0.25rem;
+    }
+    
+    .chat-container {
+        margin: 0.25rem;
+        border-radius: 10px;
+    }
+    
+    .input-area {
+        padding: 0.5rem;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .user-prompt .up,
+    .ai-prompt .up {
+        max-width: 90%;
+    }
+    
+    .message-content {
+        padding: 0.75rem;
+    }
+    
+    .welcome-content {
+        padding: 1rem;
+    }
+}
+
+/* Typing dots animation for AI response */
+.typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem 0;
+}
+
+.typing-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-pink);
+    animation: typingDots 1.4s infinite ease-in-out both;
+}
+
+.typing-dots .dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dots .dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typingDots {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* Delete Button */
@@ -581,377 +787,401 @@ body {
 /* Welcome Screen Styles */
 .welcome-screen {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
+    justify-content: center;
+    flex: 1;
     text-align: center;
     padding: 2rem;
+    background: white;
 }
 
-.welcome-content {
-    max-width: 400px;
+.welcome-content h2 {
+    color: var(--accent-pink);
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+.welcome-content p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    opacity: 0.8;
 }
 
 .welcome-logo {
     width: 80px;
     height: 80px;
-    margin-bottom: 1.5rem;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.welcome-content h2 {
-    color: var(--accent-pink);
     margin-bottom: 1rem;
-    font-size: 1.8rem;
+    border-radius: 50%;
 }
 
-.welcome-content p {
+/* Input Area Styles */
+.input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-top: 1px solid #E0E0E0;
+    margin: 0 1rem 1rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    min-height: 60px;
+    max-height: 80px;
+}
+
+.attachment-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.attachment-btn {
+    background: var(--light-gray);
     color: var(--text-color);
-    font-size: 1.2rem;
-    line-height: 1.5;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.attachment-btn:hover {
+    background: var(--secondary-pink);
+    color: var(--accent-pink);
+    transform: scale(1.05);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    background: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-content.show {
+    display: block;
+    animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.dropdown-item:hover {
+    background: var(--light-gray);
+}
+
+.dropdown-item:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.mic-btn {
+    background: var(--light-gray);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mic-btn:hover {
+    background: var(--secondary-pink);
+    color: var(--accent-pink);
+    transform: scale(1.05);
+}
+
+.mic-btn.recording {
+    background: #ff4757;
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.typing-wrapper {
+    flex: 1;
+    position: relative;
+    background: var(--light-gray);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    margin: 0 0.5rem;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 0.4rem 0;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    background: transparent;
+    resize: none;
+    min-height: 18px;
+    max-height: 60px;
+}
+
+.chat-input::placeholder {
+    color: #999;
+}
+
+.send-button {
+    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.send-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(129, 78, 152, 0.4);
+}
+
+.send-button:active {
+    transform: scale(0.95);
+}
+
+/* File Preview Styles */
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--secondary-pink);
+    color: var(--accent-pink);
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--primary-pink);
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.preview-title {
+    font-weight: 500;
+    flex: 1;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-size {
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+.remove-preview {
+    background: none;
+    border: none;
+    color: var(--accent-pink);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-preview:hover {
+    background: var(--accent-pink);
+    color: white;
 }
 
 /* Chat Messages Container */
 .chat-messages {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
     padding: 1rem;
-    min-height: 0;
+    margin-bottom: 1rem;
+    scroll-behavior: smooth;
 }
 
-/* Welcome Screen - should not scroll */
-.welcome-screen {
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--secondary-pink);
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-pink);
+}
+
+/* Message Actions */
+.message-actions {
+    margin-top: 0.5rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-    padding: 2rem;
-    overflow: hidden;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-/* Attachment Dropdown Styles */
-.attachment-dropdown {
-    position: relative;
-    display: inline-block;
+.user-prompt:hover .message-actions,
+.ai-prompt:hover .message-actions {
+    opacity: 1;
 }
 
-.attachment-btn {
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+.action-btn {
     background: none;
     border: none;
-}
-
-.attachment-btn:hover {
-    color: var(--accent-pink);
-    background-color: rgba(255, 158, 210, 0.1);
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 8px 0;
-    z-index: 1000;
-    margin-bottom: 8px;
-}
-
-.attachment-dropdown:hover .dropdown-content {
-    display: block;
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding: 8px 16px;
-    border: none;
-    background: none;
-    color: var(--text-color);
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    font-size: 0.9rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-size: 0.8rem;
 }
 
-.dropdown-item:hover {
-    background-color: var(--secondary-pink);
-    color: white;
+.user-prompt .action-btn {
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.dropdown-item i {
-    width: 20px;
-    text-align: center;
+.ai-prompt .action-btn {
+    color: rgba(74, 74, 74, 0.7);
 }
 
-/* Add a small arrow to the dropdown */
-.dropdown-content::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 20px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid white;
+.action-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: inherit;
 }
 
-/* File Preview Styles */
-.file-preview {
-    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
-    border-radius: 12px;
-    margin: 8px 0;
-    display: flex;
-    align-items: center;
-    animation: slideInUp 0.3s ease-in-out;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-    padding: 12px 18px;
-    min-width: 180px;
-    max-width: 350px;
-    color: #fff;
-}
-
-.file-preview .preview-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-
-.file-preview .preview-title {
-    flex: 1;
-    font-size: 15px;
-    color: #fff;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background: none;
-    padding: 0 4px;
-    letter-spacing: 0.2px;
-}
-
-.file-preview .file-size {
-    font-size: 12px;
-    color: #f3e6f7;
-    margin-left: 6px;
-}
-
-.file-preview i.fas {
-    font-size: 20px;
-    color: #fff;
-    background: rgba(255,255,255,0.12);
-    padding: 7px;
-    border-radius: 6px;
-}
-
-.file-preview .remove-preview {
-    background: rgba(255,255,255,0.18);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background-color 0.2s;
-    width: 28px;
-    height: 28px;
-    margin-left: 8px;
-}
-
-.file-preview .remove-preview:hover {
-    background: rgba(255,255,255,0.3);
-}
-
-.file-preview .remove-preview i {
-    font-size: 13px;
-}
-
-/* Message Attachments Styles */
-.message-attachments {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.user-prompt .message-attachments {
-    border-top-color: rgba(255, 255, 255, 0.3);
-}
-
-.ai-prompt .message-attachments {
-    border-top-color: rgba(0, 0, 0, 0.1);
-}
-
-.message-attachment {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    margin-bottom: 4px;
-    font-size: 0.9rem;
-}
-
-.user-prompt .message-attachment {
+.user-prompt .action-btn:hover {
     background: rgba(255, 255, 255, 0.2);
     color: white;
 }
 
-.ai-prompt .message-attachment {
-    background: rgba(0, 0, 0, 0.05);
+.ai-prompt .action-btn:hover {
+    background: rgba(74, 74, 74, 0.1);
     color: var(--text-color);
 }
 
-.message-attachment i {
-    font-size: 14px;
-    width: 16px;
-    text-align: center;
+/* Text formatting styles */
+.message-text strong {
+    font-weight: 600;
 }
 
-.attachment-name {
-    flex: 1;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.message-text em {
+    font-style: italic;
 }
 
-.attachment-size {
-    font-size: 0.8rem;
-    opacity: 0.8;
-    font-weight: normal;
+.message-text code {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
 }
 
-.user-prompt .attachment-size {
-    color: rgba(255, 255, 255, 0.8);
+.message-text pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.75rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 0.5rem 0;
 }
 
-.ai-prompt .attachment-size {
-    color: rgba(0, 0, 0, 0.6);
+.message-text pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85em;
 }
 
-/* Responsive Design and Layout Fixes */
-@media (max-width: 1024px) {
-    .left {
-        width: 240px;
-        min-width: 240px;
-        max-width: 240px;
-    }
+.user-prompt .message-text code {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 768px) {
-    .left {
-        width: 200px;
-        min-width: 200px;
-        max-width: 200px;
-        padding: 0.5rem;
-    }
-    
-    .right {
-        padding: 0.5rem;
-    }
-    
-    .input-area {
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
+.user-prompt .message-text pre {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
-@media (max-width: 480px) {
-    .body {
-        flex-direction: column;
-    }
-    
-    .left {
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        height: 150px;
-        max-height: 150px;
-        overflow-y: auto;
-    }
-    
-    .line {
-        width: 100%;
-        height: 1px;
-    }
-    
-    .right {
-        flex: 1;
-        min-height: 0;
-    }
+.message-text a {
+    color: var(--accent-pink);
+    text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
-/* Ensure no layout shifts during interactions */
-.app-container,
-.body,
-.left,
-.right {
-    box-sizing: border-box;
+.message-text a:hover {
+    color: var(--primary-pink);
 }
 
-/* Prevent shrinking during file operations */
-.left.processing,
-.body.processing {
-    pointer-events: none;
+.user-prompt .message-text a {
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.left.processing {
-    width: 260px !important;
-    min-width: 260px !important;
-    max-width: 260px !important;
-}
-
-.mic-btn {
-    background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    box-shadow: 0 2px 8px rgba(129, 78, 152, 0.15);
-    transition: box-shadow 0.3s, background 0.3s, color 0.3s, filter 0.3s;
-    cursor: pointer;
-    position: relative;
-}
-
-.mic-btn:hover {
-    background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink));
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(129, 78, 152, 0.25);
-}
-
-.mic-btn.recording {
-    animation: mic-glow 1s infinite alternate;
-    filter: drop-shadow(0 0 8px var(--accent-pink));
-}
-
-@keyframes mic-glow {
-    from { box-shadow: 0 0 0 0 var(--accent-pink); }
-    to { box-shadow: 0 0 16px 6px var(--accent-pink); }
-}
-
-.mic-btn i.fas.fa-microphone {
-    font-size: 1.7rem;
+.user-prompt .message-text a:hover {
     color: white;
 }
